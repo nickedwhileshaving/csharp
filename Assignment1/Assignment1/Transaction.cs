@@ -22,7 +22,7 @@ namespace Assignment1
             this.accountNumber = theValue;
             return this;
         }
-        private int getTransactionDate()
+        public int getTransactionDate()
         {
             return this.transactionDate;
         }

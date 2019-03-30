@@ -29,6 +29,21 @@ namespace Assignment1
                 populateTransactionListFromFile();
             }
         }
+        public void commitToFile()
+        {
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+            StreamWriter aFile = new StreamWriter(filePath, true);
+            foreach (Transaction anItem in theTransactionList)
+            {
+                aFile.WriteLine(anItem.getAccountNumber() + "|" +
+                    anItem.getTransactionDate() + "|" +
+                    anItem.getTransactionAmount() + "|" +
+                    anItem.getIsPositive());
+            }
+        }
         private void populateTransactionListFromFile()
         {
             string[] lines = File.ReadAllLines(filePath);
@@ -42,6 +57,7 @@ namespace Assignment1
                     .setTransactionDate(Int32.Parse(words[1]))
                     .setTransactionAmount(Convert.ToDouble(words[2]))
                     .setIsPositive(Convert.ToBoolean(words[3]));
+                theTransactionList.Add(aTransaction);
                 //make sure to use true/false
             }
         }
