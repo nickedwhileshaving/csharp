@@ -13,9 +13,11 @@ namespace Assignment1
         private static String someBlanks = "                             ";
         private static ArrayList myList = new ArrayList();
         private static string theErrorMessage = "";
+        private static ConsoleColor theBeginningConsoleColor;
 
         static void Main(string[] argumentArray)
         {
+            theBeginningConsoleColor = Console.ForegroundColor;
             string fileLocation = null;
             if (argumentArray.Length > 0)
             {
@@ -29,6 +31,7 @@ namespace Assignment1
             {
                 Console.WriteLine("Please pass in the file location where the transactions will be stored.");
             }
+            Console.ForegroundColor = theBeginningConsoleColor;
         }
         private static void TopMenu()
         {
@@ -69,12 +72,13 @@ namespace Assignment1
                 string theInputValue = Console.ReadLine();
                 switch (theInputValue)
                 {
-                    case "0":
                     case "1":
                     case "2":
+                    case "3":
                         string theacct = theInputValue;
+                        optionsMenu();
                         break;
-                    case "x":
+                    case "4":
                         keepRunning = false;
                         break;
                     default:
@@ -92,8 +96,10 @@ namespace Assignment1
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Please enter your account number.");
-            Console.WriteLine(someBlanks + "Or, enter \"x\" to exit this screen.");
-            Console.WriteLine(someBlanks + "Your valid account numbers are 0, 1, and 2.");
+            Console.WriteLine(someBlanks + "1. Account #1");
+            Console.WriteLine(someBlanks + "2. Account #2");
+            Console.WriteLine(someBlanks + "3. Account #3");
+            Console.WriteLine(someBlanks + "4. Exit");
             Console.WriteLine();
             theErrorMessage = "";
         }
