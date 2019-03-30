@@ -17,8 +17,7 @@ namespace Assignment1
         static void Main(string[] args)
         {
             init();
-            //Console.BackgroundColor = ConsoleColor.Blue;
-            Console.ForegroundColor = ConsoleColor.Green;
+           
             displayMenuScreen();
             while (1 == 1)
             {
@@ -39,7 +38,9 @@ namespace Assignment1
         {
             Console.Clear();
             addTopMargin();
-            Console.WriteLine(theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Welcome to Niki's ATM!");
             Console.WriteLine(someBlanks + "Please enter your account number.");
             Console.WriteLine(someBlanks + "Your valid account numbers are 0, 1, and 2.");
