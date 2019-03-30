@@ -69,9 +69,13 @@ namespace Assignment1
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                if ("X".Equals(theInputValue))
+                if ("x".Equals(theInputValue))
                 {
                     keepRunning = false;
+                }
+                else
+                {
+                    theErrorMessage = "Please enter an \"x\"";
                 }
                 displayCheckBalanceScreen();
             }
@@ -84,6 +88,7 @@ namespace Assignment1
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Here is your balance.");
+            Console.WriteLine(someBlanks + "Please enter \"x\" to exit.");
             Console.WriteLine();
             theErrorMessage = "";
         }
