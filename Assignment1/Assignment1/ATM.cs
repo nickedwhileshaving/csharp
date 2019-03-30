@@ -14,24 +14,57 @@ namespace Assignment1
         private static ArrayList myList = new ArrayList();
         private static string theErrorMessage = "";
 
-        static void Main(string[] args)
+        static void Main(string[] argumentArray)
+        {
+            string fileLocation = null;
+            if (argumentArray.Length > 0)
+            {
+                fileLocation = argumentArray[0];
+            }
+            if (fileLocation != null)
+            {
+                TopMenu();
+            }
+            else
+            {
+                Console.WriteLine("Please pass in the file location where the transactions will be stored.");
+            }
+        }
+        private static void TopMenu()
         {
             init();
             displayMenuScreen();
-            while (1 == 1)
+            bool keepRunning = true;
+            while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                if (isAccountInList(theInputValue))
+                switch (theInputValue)
                 {
-                    optionsMenu();
-                }
-                else
-                {
-                    theErrorMessage = "The account number you entered is invalid.";
+                    case "1":
+                        firstTime();
+                        break;
+                    case "2":
+                        chooseAccounts();
+                        break;
+                    case "3":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
                 }
                 displayMenuScreen();
             }
         }
+        private static  void firstTime()
+        {
+
+        }
+        private static void chooseAccounts()
+        {
+
+        }
+
         private static void optionsMenu()
         {
             displayOptionsScreen();
@@ -122,8 +155,12 @@ namespace Assignment1
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Welcome to Niki's ATM!");
-            Console.WriteLine(someBlanks + "Please enter your account number.");
-            Console.WriteLine(someBlanks + "Your valid account numbers are 0, 1, and 2.");
+            Console.WriteLine(someBlanks + "Please enter a number corresponding to the numbers below.");
+            Console.WriteLine(someBlanks + "1. First Time");
+            Console.WriteLine(someBlanks + "2. Choose Accounts");
+            Console.WriteLine(someBlanks + "3. Exit");
+            //Console.WriteLine(someBlanks + "Please enter your account number.");
+            //Console.WriteLine(someBlanks + "Your valid account numbers are 0, 1, and 2.");
             Console.WriteLine();
             theErrorMessage = "";
         }

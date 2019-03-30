@@ -1,0 +1,8 @@
+﻿ if (isAccountInList(theInputValue))
+                    {
+                        optionsMenu();
+                    }
+                    else
+                    {
+                        theErrorMessage = "The account number you entered is invalid.";
+                    }
