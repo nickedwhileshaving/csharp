@@ -17,7 +17,6 @@ namespace Assignment1
         static void Main(string[] args)
         {
             init();
-           
             displayMenuScreen();
             while (1 == 1)
             {
