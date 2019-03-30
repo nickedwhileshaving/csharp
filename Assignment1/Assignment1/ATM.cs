@@ -36,39 +36,77 @@ namespace Assignment1
         private static void optionsMenu()
         {
             displayOptionsScreen();
-            while (1 == 1)
+            bool keepRunning = true;
+            while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                if (isAccountInList(theInputValue))
+                switch (theInputValue)
                 {
-                    Console.WriteLine("working");
-                    Thread.Sleep(5000);
+                    case "1":
+                        runDepositScreen();
+                        break;
+                    case "2":
+                        runWithdrawScreen();
+                        break;
+                    case "3":
+                        runCheckBalanceScreen();
+                        break;
+                    case "4":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
                 }
-                else
-                {
-                    theErrorMessage = "The account number you entered is invalid.";
-                }
-                displayMenuScreen();
+                
+                displayOptionsScreen();
             }
         }
-        private static void displayOptionsScreen()
+        private static void runCheckBalanceScreen()
         {
-            /*
-1.	Deposit
-2.	Withdraw
-3.	Check Balance
-4.	Exit – this will bust out of loop and take you back to the Top Menu in ATM
-
-    */
+            displayCheckBalanceScreen();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                if ("X".Equals(theInputValue))
+                {
+                    keepRunning = false;
+                }
+                displayCheckBalanceScreen();
+            }
+        }
+        private static void displayCheckBalanceScreen()
+        {
             Console.Clear();
             addTopMargin();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Here is your balance.");
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
+        private static void runWithdrawScreen()
+        {
+            Console.WriteLine("Please make your withdrawl.");
+        }
+        private static void runDepositScreen()
+        {
+            Console.WriteLine("Your dep is");
+        }
+        private static void displayOptionsScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Please enter a number corresponding to the numbers below.");
             Console.WriteLine(someBlanks + "1. Deposit");
             Console.WriteLine(someBlanks + "2. Withdraw");
             Console.WriteLine(someBlanks + "3. Check Balance");
-            Console.WriteLine(someBlanks + "4. Exit")
+            Console.WriteLine(someBlanks + "4. Exit");           
             Console.WriteLine();
             theErrorMessage = "";
         }
