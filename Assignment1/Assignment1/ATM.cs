@@ -32,7 +32,6 @@ namespace Assignment1
         }
         private static void TopMenu()
         {
-            init();
             displayMenuScreen();
             bool keepRunning = true;
             while (keepRunning)
@@ -58,13 +57,46 @@ namespace Assignment1
         }
         private static  void firstTime()
         {
-
+            init();
+            theErrorMessage = "Everything has been initialized.";
         }
         private static void chooseAccounts()
         {
-
+            displayAccountsScreen();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                switch (theInputValue)
+                {
+                    case "0":
+                    case "1":
+                    case "2":
+                        string theacct = theInputValue;
+                        break;
+                    case "x":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid account number.";
+                        break;
+                }
+                displayAccountsScreen();
+            }
         }
-
+        private static void displayAccountsScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Please enter your account number.");
+            Console.WriteLine(someBlanks + "Or, enter \"x\" to exit this screen.");
+            Console.WriteLine(someBlanks + "Your valid account numbers are 0, 1, and 2.");
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
         private static void optionsMenu()
         {
             displayOptionsScreen();
