@@ -24,6 +24,23 @@ namespace Assignment1
                 string theInputValue = Console.ReadLine();
                 if (isAccountInList(theInputValue))
                 {
+                    optionsMenu();
+                }
+                else
+                {
+                    theErrorMessage = "The account number you entered is invalid.";
+                }
+                displayMenuScreen();
+            }
+        }
+        private static void optionsMenu()
+        {
+            displayOptionsScreen();
+            while (1 == 1)
+            {
+                string theInputValue = Console.ReadLine();
+                if (isAccountInList(theInputValue))
+                {
                     Console.WriteLine("working");
                     Thread.Sleep(5000);
                 }
@@ -33,6 +50,27 @@ namespace Assignment1
                 }
                 displayMenuScreen();
             }
+        }
+        private static void displayOptionsScreen()
+        {
+            /*
+1.	Deposit
+2.	Withdraw
+3.	Check Balance
+4.	Exit – this will bust out of loop and take you back to the Top Menu in ATM
+
+    */
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "1. Deposit");
+            Console.WriteLine(someBlanks + "2. Withdraw");
+            Console.WriteLine(someBlanks + "3. Check Balance");
+            Console.WriteLine(someBlanks + "4. Exit")
+            Console.WriteLine();
+            theErrorMessage = "";
         }
         private static void displayMenuScreen()
         {
