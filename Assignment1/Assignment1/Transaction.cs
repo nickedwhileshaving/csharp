@@ -12,7 +12,19 @@ namespace Assignment1
         private int transactionDate;
         private double transactionAmount;
         private bool isPositive;
+        
+        public Transaction()
+        {
 
+        }
+        public Transaction(string accountNumber, int transactionDate, double transactionAmount, bool isPositive)
+        {
+            this.accountNumber = accountNumber;
+            this.transactionDate = transactionDate;
+            this.transactionAmount = transactionAmount;
+            this.isPositive = isPositive;
+
+        }
         public string getAccountNumber()
         {
             return this.accountNumber;

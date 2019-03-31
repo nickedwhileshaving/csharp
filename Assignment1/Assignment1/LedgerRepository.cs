@@ -7,9 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment1
-{
+{    
     class LedgerRepository
     {
+        private string delimiter = "|";
         private ArrayList theTransactionList;
         private bool isFirstTime;
         private ArrayList accountList;
@@ -29,6 +30,44 @@ namespace Assignment1
                 populateTransactionListFromFile();
             }
         }
+        public double getBalance(string theAccountNumber)
+        {
+            ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
+            double theBalance = 0.00;
+            foreach (Transaction item in aNewArrayList)
+            {
+                if (item.getIsPositive())
+                {
+                    theBalance = theBalance + item.getTransactionAmount();
+                }
+                else
+                {
+                    theBalance = theBalance - item.getTransactionAmount();
+                }
+            }
+            return theBalance;
+        }
+        public string addDeposit(string theAccountNumber, int transactionDate, double transactionAmount)
+        {
+            Transaction aTransaction = new Transaction(theAccountNumber, transactionDate, transactionAmount, true);
+            theTransactionList.Add(aTransaction);
+            return null;
+        }
+        public string addWithdrawal(string theAccountNumber, int transactionDate, double transactionAmount)
+        {
+            double theBalance = getBalance(theAccountNumber);
+            string theReturn = null;
+            if (transactionAmount > theBalance)
+            {
+                theReturn = "There are not enough funds in the account to execute the transaction.";
+            }
+            else
+            {
+                Transaction aTransaction = new Transaction(theAccountNumber, transactionDate, transactionAmount, false);
+                theTransactionList.Add(aTransaction);
+            }
+            return theReturn;
+        }
         public void commitToFile()
         {
             if (File.Exists(filePath))
@@ -38,11 +77,23 @@ namespace Assignment1
             StreamWriter aFile = new StreamWriter(filePath, true);
             foreach (Transaction anItem in theTransactionList)
             {
-                aFile.WriteLine(anItem.getAccountNumber() + "|" +
-                    anItem.getTransactionDate() + "|" +
-                    anItem.getTransactionAmount() + "|" +
+                aFile.WriteLine(anItem.getAccountNumber() + delimiter +
+                    anItem.getTransactionDate() + delimiter +
+                    anItem.getTransactionAmount() + delimiter +
                     anItem.getIsPositive());
             }
+        }
+        private ArrayList getListForAnAccount(string accountNumber)
+        {
+            ArrayList anArrayList = new ArrayList();
+            foreach (Transaction item in theTransactionList)
+            {
+                if (item.getAccountNumber().Equals(accountNumber))
+                {
+                    anArrayList.Add(item);
+                }
+            }
+            return anArrayList;
         }
         private void populateTransactionListFromFile()
         {
