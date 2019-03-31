@@ -12,6 +12,7 @@ namespace Assignment1
         private int transactionDate;
         private double transactionAmount;
         private bool isPositive;
+        private string memo;
 
         public string getAccountNumber()
         {
@@ -47,6 +48,15 @@ namespace Assignment1
         public Transaction setIsPositive(bool theValue)
         {
             this.isPositive = theValue;
+            return this;
+        }
+        public string getMemo()
+        {
+            return this.memo;
+        }
+        public Transaction setMemo(string theValue)
+        {
+            this.memo = theValue;
             return this;
         }
     }

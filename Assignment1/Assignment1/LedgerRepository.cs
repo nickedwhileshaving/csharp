@@ -62,7 +62,8 @@ namespace Assignment1
             aTransaction.setAccountNumber(theAccountNumber)
                 .setTransactionDate(theTransactionDate)
                 .setTransactionAmount(transactionAmount)
-                .setIsPositive(true);
+                .setIsPositive(true)
+                .setMemo("DEPOSIT");
             theTransactionList.Add(aTransaction);
             return null;
         }
@@ -81,7 +82,8 @@ namespace Assignment1
                 aTransaction.setAccountNumber(theAccountNumber)
                     .setTransactionDate(transactionDate)
                     .setTransactionAmount(transactionAmount)
-                    .setIsPositive(false);
+                    .setIsPositive(false)
+                    .setMemo("WITHDRAWAL");
                 theTransactionList.Add(aTransaction);
             }
             return theReturn;
@@ -96,16 +98,19 @@ namespace Assignment1
             {
                 foreach (Transaction anItem in theTransactionList)
                 {
-                    string theval = anItem.getAccountNumber();
-                    theval = anItem.getIsPositive() + "";
-                    theval = anItem.getTransactionDate() + "";
-                    theval = anItem.getTransactionAmount() + "";
                     aStreamWriter.WriteLine(anItem.getAccountNumber() + delimiter +
                         anItem.getTransactionDate() + delimiter +
                         anItem.getTransactionAmount() + delimiter +
-                        anItem.getIsPositive());
+                        anItem.getIsPositive() + delimiter +
+                        anItem.getMemo());
                 }
             }
+        }
+        public Transaction getLastTransactionForAnAccount(string anAccountNumber)
+        {
+            ArrayList aNewArrayList = getListForAnAccount(anAccountNumber);
+            Transaction aTransaction = (Transaction)aNewArrayList[aNewArrayList.Count - 1];
+            return aTransaction;
         }
         private ArrayList getListForAnAccount(string accountNumber)
         {
@@ -121,8 +126,7 @@ namespace Assignment1
         }
         private void calculateInterest(string theAccountNumber, int theTransactionDate)
         {
-            ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
-            Transaction aTransaction = (Transaction)aNewArrayList[aNewArrayList.Count - 1];
+            Transaction aTransaction = getLastTransactionForAnAccount(theAccountNumber);
             int differenceInDays = theTransactionDate - aTransaction.getTransactionDate();
             if (differenceInDays != 0)
             {
@@ -132,7 +136,8 @@ namespace Assignment1
                 anInterestTransaction.setAccountNumber(theAccountNumber)
                     .setTransactionAmount(interestTransactionAmount)
                     .setTransactionDate(theTransactionDate)
-                    .setIsPositive(true);
+                    .setIsPositive(true)
+                    .setMemo("INTEREST");
                 theTransactionList.Add(anInterestTransaction);
             }
         }
@@ -148,7 +153,8 @@ namespace Assignment1
                 aTransaction.setAccountNumber(words[0])
                     .setTransactionDate(Int32.Parse(words[1]))
                     .setTransactionAmount(Convert.ToDouble(words[2]))
-                    .setIsPositive(Convert.ToBoolean(words[3]));
+                    .setIsPositive(Convert.ToBoolean(words[3]))
+                    .setMemo((words[4]));
                 theTransactionList.Add(aTransaction);
                 //make sure to use true/false
             }
@@ -162,7 +168,8 @@ namespace Assignment1
                 aTransaction.setAccountNumber(item)
                     .setIsPositive(true)
                     .setTransactionAmount(100.00)
-                    .setTransactionDate(firstDayOfTheYear);
+                    .setTransactionDate(firstDayOfTheYear)
+                    .setMemo("INITIALIZE");
                 theTransactionList.Add(aTransaction);
             }
         }

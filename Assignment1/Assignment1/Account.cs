@@ -13,7 +13,7 @@ namespace Assignment1
         private static string theErrorMessage = "";
         private static LedgerRepository theLedgerRepository;
         private static string accountNumber;
-        private static string userEnterTransactionDate = null;
+        private static string userEnteredTransactionDate = null;
         private static string firstDateOfThisYear = "01/01/2019";
         private static string theDateFormat = "MM/dd/yyyy";
         
@@ -72,13 +72,12 @@ namespace Assignment1
         }
         private static void runCheckBalanceScreen()
         {
-            double theBalance = theLedgerRepository.getAccountBalance(accountNumber, 100);
+            double theBalance = 0;
             displayCheckBalanceScreen(theBalance);
             bool keepRunning = true;
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                //userEnterTransactionDate
                 theErrorMessage = "";
                 if ("x".Equals(theInputValue))
                 {
@@ -87,7 +86,8 @@ namespace Assignment1
                 else {
                     if (getJulianforGregorian(theInputValue) > 0)
                     {
-                        theErrorMessage = getJulianforGregorian(theInputValue) + "";
+                        userEnteredTransactionDate = theInputValue;
+                        theBalance = theLedgerRepository.getAccountBalance(accountNumber, getJulianforGregorian(theInputValue));
                     }
                     else
                     {
@@ -95,17 +95,21 @@ namespace Assignment1
                     }
                 }
                 displayCheckBalanceScreen(theBalance);
+                userEnteredTransactionDate = null;
             }
         }
         private static int getJulianforGregorian(string aDate)
         {
             int aReturnValue = 0;
             DateTime aFirstDateDateTime = DateTime.ParseExact(firstDateOfThisYear, theDateFormat, System.Globalization.CultureInfo.InvariantCulture);
+            Transaction theLastTransaction = theLedgerRepository.getLastTransactionForAnAccount(accountNumber);
+            int theLastDateJulian = theLastTransaction.getTransactionDate();
+            int daysDifference = theLastDateJulian - 1;
+            DateTime theVeryLastDateTime = aFirstDateDateTime.AddDays(daysDifference);
             try
             {
-
                 DateTime aDateTime = DateTime.ParseExact(aDate, theDateFormat, System.Globalization.CultureInfo.InvariantCulture);
-                TimeSpan aTimeSpan = (aDateTime.Subtract(aFirstDateDateTime));
+                TimeSpan aTimeSpan = (aDateTime.Subtract(theVeryLastDateTime));
                 if (aTimeSpan.Hours >= 0)
                 {
                     aReturnValue = aTimeSpan.Days + 1;
@@ -124,7 +128,7 @@ namespace Assignment1
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            if (userEnterTransactionDate != null)
+            if (userEnteredTransactionDate != null)
             {
                 Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
             }
