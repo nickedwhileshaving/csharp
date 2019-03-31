@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
+    /*
+     * This class controls the top level of screens for the application
+     * When it's time to do account level work, it hands control off to
+     * the Account class
+     */
     class ATM
     {
         private static String someBlanks = "                             ";

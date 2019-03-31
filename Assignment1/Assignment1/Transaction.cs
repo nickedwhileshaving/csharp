@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
+    /*
+     * This class is a holder of a single transaction and it's data.  
+     * It does nothing
+     */
     class Transaction
     {
         private string accountNumber;

@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
+    /*
+     * This class controls the screens and validation for the account level screens.
+     * It hangs onto the LedgerRepository and calls upon it when it needs to.
+     */
     class Account
     {
         private static String someBlanks = "                             ";
@@ -16,7 +20,11 @@ namespace Assignment1
         private static string userEnteredTransactionDate = null;
         private static string firstDateOfThisYear = "01/01/2019";
         private static string theDateFormat = "MM/dd/yyyy";
-        
+        private static string theTransactionAmount;
+        private static string invalidDateMessage = "That is an invalid date.";
+        private static string transactionDatePrompt = "Please enter a transaction date in the format " + theDateFormat + ".";
+        private static string theExitPrompt = "Please enter \"x\" to exit.";
+
         public static void optionsMenu(LedgerRepository aLedgerRepository, string theAccountNumber)
         {
             accountNumber = theAccountNumber;
@@ -29,10 +37,10 @@ namespace Assignment1
                 switch (theInputValue)
                 {
                     case "1":
-                        runDepositScreen();
+                        runAddDepositScreen();
                         break;
                     case "2":
-                        runWithdrawScreen();
+                        runAddWithdrawalScreen();
                         break;
                     case "3":
                         runCheckBalanceScreen();
@@ -91,10 +99,70 @@ namespace Assignment1
                     }
                     else
                     {
-                        theErrorMessage = "That is an invalid date.";
+                        theErrorMessage = invalidDateMessage;
                     }
                 }
                 displayCheckBalanceScreen(theBalance);
+                userEnteredTransactionDate = null;
+            }
+        }
+        private static void runAddDepositScreen()
+        {
+            double theBalance = 0;
+            displayAddDepositScreen();
+            bool keepRunning = true;
+            theTransactionAmount = null;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                theErrorMessage = "";
+                if ("x".Equals(theInputValue))
+                {
+                    keepRunning = false;
+                }
+                else
+                {
+                    if (getJulianforGregorian(theInputValue) > 0)
+                    {
+                        userEnteredTransactionDate = theInputValue;
+                        theBalance = theLedgerRepository.getAccountBalance(accountNumber, getJulianforGregorian(theInputValue));
+                    }
+                    else
+                    {
+                        theErrorMessage = invalidDateMessage;
+                    }
+                }
+                displayAddDepositScreen();
+                userEnteredTransactionDate = null;
+            }
+        }
+        private static void runAddWithdrawalScreen()
+        {
+            double theBalance = 0;
+            displayAddWithdrawalScreen();
+            bool keepRunning = true;
+            theTransactionAmount = null;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                theErrorMessage = "";
+                if ("x".Equals(theInputValue))
+                {
+                    keepRunning = false;
+                }
+                else
+                {
+                    if (getJulianforGregorian(theInputValue) > 0)
+                    {
+                        userEnteredTransactionDate = theInputValue;
+                        theBalance = theLedgerRepository.getAccountBalance(accountNumber, getJulianforGregorian(theInputValue));
+                    }
+                    else
+                    {
+                        theErrorMessage = invalidDateMessage;
+                    }
+                }
+                displayAddWithdrawalScreen();
                 userEnteredTransactionDate = null;
             }
         }
@@ -134,9 +202,47 @@ namespace Assignment1
             }
             else
             {
-                Console.WriteLine(someBlanks + "Please enter a transaction date in the format " + theDateFormat + ".");                
+                Console.WriteLine(someBlanks + transactionDatePrompt);                
             }
-            Console.WriteLine(someBlanks + "Please enter \"x\" to exit.");
+            Console.WriteLine(someBlanks + theExitPrompt);
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
+        private static void displayAddDepositScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (userEnteredTransactionDate != null)
+            {
+                //Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
+            }
+            else
+            {
+                Console.WriteLine(someBlanks + transactionDatePrompt);
+            }
+            Console.WriteLine(someBlanks + theExitPrompt);
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
+        private static void displayAddWithdrawalScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            if (userEnteredTransactionDate != null)
+            {
+                //Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
+            }
+            else
+            {
+                Console.WriteLine(someBlanks + transactionDatePrompt);
+            }
+            Console.WriteLine(someBlanks + theExitPrompt);
             Console.WriteLine();
             theErrorMessage = "";
         }
