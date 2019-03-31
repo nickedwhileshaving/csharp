@@ -14,11 +14,13 @@ namespace Assignment1
         private static ArrayList myList = new ArrayList();
         private static string theErrorMessage = "";
         private static ConsoleColor theBeginningConsoleColor;
+        private static LedgerRepository theLedgerRepository;
+        private static string fileLocation;
 
         static void Main(string[] argumentArray)
         {
             theBeginningConsoleColor = Console.ForegroundColor;
-            string fileLocation = null;
+            fileLocation = null;
             if (argumentArray.Length > 0)
             {
                 fileLocation = argumentArray[0];
@@ -50,6 +52,10 @@ namespace Assignment1
                         break;
                     case "3":
                         keepRunning = false;
+                        if (theLedgerRepository != null)
+                        {
+                            theLedgerRepository.commitToFile();
+                        }
                         break;
                     default:
                         theErrorMessage = "Please enter a valid menu option.";
@@ -58,13 +64,15 @@ namespace Assignment1
                 displayMenuScreen();
             }
         }
-        private static  void firstTime()
+        private static void firstTime()
         {
             init();
+            theLedgerRepository = new LedgerRepository(fileLocation, myList, true);
             theErrorMessage = "Everything has been initialized.";
         }
         private static void chooseAccounts()
         {
+            theLedgerRepository = new LedgerRepository(fileLocation, myList, false);
             displayAccountsScreen();
             bool keepRunning = true;
             while (keepRunning)
@@ -76,7 +84,7 @@ namespace Assignment1
                     case "2":
                     case "3":
                         string theacct = theInputValue;
-                        Account.optionsMenu();
+                        Account.optionsMenu(theLedgerRepository);
                         break;
                     case "4":
                         keepRunning = false;

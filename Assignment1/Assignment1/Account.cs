@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,8 +11,10 @@ namespace Assignment1
     {
         private static String someBlanks = "                             ";
         private static string theErrorMessage = "";
-        public static void optionsMenu()
+        private static LedgerRepository theLedgerRepository;
+        public static void optionsMenu(LedgerRepository aLedgerRepository)
         {
+            theLedgerRepository = aLedgerRepository;
             displayOptionsScreen();
             bool keepRunning = true;
             while (keepRunning)

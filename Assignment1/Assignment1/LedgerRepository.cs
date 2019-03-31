@@ -16,12 +16,14 @@ namespace Assignment1
         private ArrayList accountList;
         private string filePath;
         private int firstDayOfTheYear = 1;
-        public LedgerRepository(string filePathParm, ArrayList accountList, bool isParmTime)
+        private double interestRate = 0.05;
+
+        public LedgerRepository(string filePathParm, ArrayList accountList, bool isFirstTime)
         {
-            this.isFirstTime = isParmTime;
+            this.isFirstTime = isFirstTime;
             this.accountList = accountList;
             this.filePath = filePathParm;
-            if (isParmTime || !File.Exists(filePath))
+            if (isFirstTime || !File.Exists(filePath))
             {
                 createNewTransactionList();
             }
@@ -30,8 +32,9 @@ namespace Assignment1
                 populateTransactionListFromFile();
             }
         }
-        public double getBalance(string theAccountNumber)
+        public double getBalance(string theAccountNumber,int thetransactionDate)
         {
+            calculateInterest(theAccountNumber, thetransactionDate);
             ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
             double theBalance = 0.00;
             foreach (Transaction item in aNewArrayList)
@@ -47,15 +50,21 @@ namespace Assignment1
             }
             return theBalance;
         }
-        public string addDeposit(string theAccountNumber, int transactionDate, double transactionAmount)
+        public string addDeposit(string theAccountNumber, int theTransactionDate, double transactionAmount)
         {
-            Transaction aTransaction = new Transaction(theAccountNumber, transactionDate, transactionAmount, true);
+            calculateInterest(theAccountNumber, theTransactionDate);
+            Transaction aTransaction = new Transaction();
+            aTransaction.setAccountNumber(theAccountNumber)
+                .setTransactionDate(theTransactionDate)
+                .setTransactionAmount(transactionAmount)
+                .setIsPositive(true);
             theTransactionList.Add(aTransaction);
             return null;
         }
         public string addWithdrawal(string theAccountNumber, int transactionDate, double transactionAmount)
         {
-            double theBalance = getBalance(theAccountNumber);
+            calculateInterest(theAccountNumber, transactionDate);
+            double theBalance = getBalance(theAccountNumber, transactionDate);
             string theReturn = null;
             if (transactionAmount > theBalance)
             {
@@ -63,7 +72,11 @@ namespace Assignment1
             }
             else
             {
-                Transaction aTransaction = new Transaction(theAccountNumber, transactionDate, transactionAmount, false);
+                Transaction aTransaction = new Transaction();
+                aTransaction.setAccountNumber(theAccountNumber)
+                    .setTransactionDate(transactionDate)
+                    .setTransactionAmount(transactionAmount)
+                    .setIsPositive(false);
                 theTransactionList.Add(aTransaction);
             }
             return theReturn;
@@ -94,6 +107,19 @@ namespace Assignment1
                 }
             }
             return anArrayList;
+        }
+        private void calculateInterest(string theAccountNumber, int theTransactionDate)
+        {
+            ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
+            Transaction aTransaction = (Transaction)aNewArrayList[aNewArrayList.Count - 1];
+            int differenceInDays = theTransactionDate - aTransaction.getTransactionDate();
+            double theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
+            double interestTransactionAmount = 365 / differenceInDays * theCurrentBalance * interestRate;
+            Transaction anInterestTransaction = new Transaction();
+            anInterestTransaction.setAccountNumber(theAccountNumber)
+                .setTransactionAmount(interestTransactionAmount)
+                .setTransactionDate(theTransactionDate)
+                .setIsPositive(true);
         }
         private void populateTransactionListFromFile()
         {
