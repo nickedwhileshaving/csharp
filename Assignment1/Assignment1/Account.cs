@@ -68,7 +68,7 @@ namespace Assignment1
         }
         private static void runCheckBalanceScreen()
         {
-            double theBalance = theLedgerRepository.getAccountBalance(accountNumber, 1);
+            double theBalance = theLedgerRepository.getAccountBalance(accountNumber, 100);
             displayCheckBalanceScreen(theBalance);
             bool keepRunning = true;
             while (keepRunning)

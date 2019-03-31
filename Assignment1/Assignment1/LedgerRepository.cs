@@ -133,6 +133,7 @@ namespace Assignment1
                     .setTransactionAmount(interestTransactionAmount)
                     .setTransactionDate(theTransactionDate)
                     .setIsPositive(true);
+                theTransactionList.Add(anInterestTransaction);
             }
         }
         private void populateTransactionListFromFile()
