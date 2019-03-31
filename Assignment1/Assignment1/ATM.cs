@@ -84,7 +84,7 @@ namespace Assignment1
                     case "2":
                     case "3":
                         string theacct = theInputValue;
-                        Account.optionsMenu(theLedgerRepository);
+                        Account.optionsMenu(theLedgerRepository, theInputValue);
                         break;
                     case "4":
                         keepRunning = false;
@@ -154,9 +154,9 @@ namespace Assignment1
         }
         private static void init()
         {
-            myList.Add("0");
             myList.Add("1");
             myList.Add("2");
+            myList.Add("3");
         }
         private static void addTopMargin()
         {

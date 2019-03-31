@@ -12,8 +12,10 @@ namespace Assignment1
         private static String someBlanks = "                             ";
         private static string theErrorMessage = "";
         private static LedgerRepository theLedgerRepository;
-        public static void optionsMenu(LedgerRepository aLedgerRepository)
+        private static string accountNumber;
+        public static void optionsMenu(LedgerRepository aLedgerRepository, string theAccountNumber)
         {
+            accountNumber = theAccountNumber;
             theLedgerRepository = aLedgerRepository;
             displayOptionsScreen();
             bool keepRunning = true;
@@ -66,7 +68,8 @@ namespace Assignment1
         }
         private static void runCheckBalanceScreen()
         {
-            displayCheckBalanceScreen();
+            double theBalance = theLedgerRepository.getAccountBalance(accountNumber, 1);
+            displayCheckBalanceScreen(theBalance);
             bool keepRunning = true;
             while (keepRunning)
             {
@@ -79,17 +82,17 @@ namespace Assignment1
                 {
                     theErrorMessage = "Please enter an \"x\"";
                 }
-                displayCheckBalanceScreen();
+                displayCheckBalanceScreen(theBalance);
             }
         }
-        private static void displayCheckBalanceScreen()
+        private static void displayCheckBalanceScreen(double theBalance)
         {
             Console.Clear();
             addTopMargin();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Here is your balance.");
+            Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
             Console.WriteLine(someBlanks + "Please enter \"x\" to exit.");
             Console.WriteLine();
             theErrorMessage = "";

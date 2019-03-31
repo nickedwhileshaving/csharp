@@ -23,6 +23,7 @@ namespace Assignment1
             this.isFirstTime = isFirstTime;
             this.accountList = accountList;
             this.filePath = filePathParm;
+            theTransactionList = new ArrayList();
             if (isFirstTime || !File.Exists(filePath))
             {
                 createNewTransactionList();
@@ -32,9 +33,13 @@ namespace Assignment1
                 populateTransactionListFromFile();
             }
         }
+        public double getAccountBalance(string theAccountNumber, int theTransactionDate)
+        {
+            calculateInterest(theAccountNumber, theTransactionDate);
+            return getBalance(theAccountNumber, theTransactionDate);
+        }
         public double getBalance(string theAccountNumber,int thetransactionDate)
         {
-            calculateInterest(theAccountNumber, thetransactionDate);
             ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
             double theBalance = 0.00;
             foreach (Transaction item in aNewArrayList)
@@ -87,13 +92,19 @@ namespace Assignment1
             {
                 File.Delete(filePath);
             }
-            StreamWriter aFile = new StreamWriter(filePath, true);
-            foreach (Transaction anItem in theTransactionList)
+            using (StreamWriter aStreamWriter = File.CreateText(filePath))
             {
-                aFile.WriteLine(anItem.getAccountNumber() + delimiter +
-                    anItem.getTransactionDate() + delimiter +
-                    anItem.getTransactionAmount() + delimiter +
-                    anItem.getIsPositive());
+                foreach (Transaction anItem in theTransactionList)
+                {
+                    string theval = anItem.getAccountNumber();
+                    theval = anItem.getIsPositive() + "";
+                    theval = anItem.getTransactionDate() + "";
+                    theval = anItem.getTransactionAmount() + "";
+                    aStreamWriter.WriteLine(anItem.getAccountNumber() + delimiter +
+                        anItem.getTransactionDate() + delimiter +
+                        anItem.getTransactionAmount() + delimiter +
+                        anItem.getIsPositive());
+                }
             }
         }
         private ArrayList getListForAnAccount(string accountNumber)
@@ -113,13 +124,16 @@ namespace Assignment1
             ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
             Transaction aTransaction = (Transaction)aNewArrayList[aNewArrayList.Count - 1];
             int differenceInDays = theTransactionDate - aTransaction.getTransactionDate();
-            double theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
-            double interestTransactionAmount = 365 / differenceInDays * theCurrentBalance * interestRate;
-            Transaction anInterestTransaction = new Transaction();
-            anInterestTransaction.setAccountNumber(theAccountNumber)
-                .setTransactionAmount(interestTransactionAmount)
-                .setTransactionDate(theTransactionDate)
-                .setIsPositive(true);
+            if (differenceInDays != 0)
+            {
+                double theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
+                double interestTransactionAmount = 365 / differenceInDays * theCurrentBalance * interestRate;
+                Transaction anInterestTransaction = new Transaction();
+                anInterestTransaction.setAccountNumber(theAccountNumber)
+                    .setTransactionAmount(interestTransactionAmount)
+                    .setTransactionDate(theTransactionDate)
+                    .setIsPositive(true);
+            }
         }
         private void populateTransactionListFromFile()
         {
@@ -140,7 +154,6 @@ namespace Assignment1
         }
         private void createNewTransactionList()
         {
-            theTransactionList = new ArrayList();
             Transaction aTransaction;
             foreach (string item in accountList)
             {
