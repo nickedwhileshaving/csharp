@@ -13,6 +13,10 @@ namespace Assignment1
         private static string theErrorMessage = "";
         private static LedgerRepository theLedgerRepository;
         private static string accountNumber;
+        private static string userEnterTransactionDate = null;
+        private static string firstDateOfThisYear = "01/01/2019";
+        private static string theDateFormat = "MM/dd/yyyy";
+        
         public static void optionsMenu(LedgerRepository aLedgerRepository, string theAccountNumber)
         {
             accountNumber = theAccountNumber;
@@ -74,16 +78,44 @@ namespace Assignment1
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
+                //userEnterTransactionDate
+                theErrorMessage = "";
                 if ("x".Equals(theInputValue))
                 {
                     keepRunning = false;
                 }
-                else
-                {
-                    theErrorMessage = "Please enter an \"x\"";
+                else {
+                    if (getJulianforGregorian(theInputValue) > 0)
+                    {
+                        theErrorMessage = getJulianforGregorian(theInputValue) + "";
+                    }
+                    else
+                    {
+                        theErrorMessage = "That is an invalid date.";
+                    }
                 }
                 displayCheckBalanceScreen(theBalance);
             }
+        }
+        private static int getJulianforGregorian(string aDate)
+        {
+            int aReturnValue = 0;
+            DateTime aFirstDateDateTime = DateTime.ParseExact(firstDateOfThisYear, theDateFormat, System.Globalization.CultureInfo.InvariantCulture);
+            try
+            {
+
+                DateTime aDateTime = DateTime.ParseExact(aDate, theDateFormat, System.Globalization.CultureInfo.InvariantCulture);
+                TimeSpan aTimeSpan = (aDateTime.Subtract(aFirstDateDateTime));
+                if (aTimeSpan.Hours >= 0)
+                {
+                    aReturnValue = aTimeSpan.Days + 1;
+                }
+            }
+            catch (Exception x)
+            {
+
+            }
+            return aReturnValue;
         }
         private static void displayCheckBalanceScreen(double theBalance)
         {
@@ -92,7 +124,14 @@ namespace Assignment1
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
+            if (userEnterTransactionDate != null)
+            {
+                Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
+            }
+            else
+            {
+                Console.WriteLine(someBlanks + "Please enter a transaction date in the format " + theDateFormat + ".");                
+            }
             Console.WriteLine(someBlanks + "Please enter \"x\" to exit.");
             Console.WriteLine();
             theErrorMessage = "";
