@@ -138,7 +138,7 @@ namespace Assignment1
             {
                 decimal theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
                 double someIntermediateValue = differenceInDays / (double)365 * Decimal.ToDouble(theCurrentBalance) * interestRate;
-                decimal interestTransactionAmount = Decimal.Multiply((decimal)someIntermediateValue,(decimal)someIntermediateValue);
+                decimal interestTransactionAmount = (decimal)someIntermediateValue;
                 if (interestTransactionAmount > (decimal)0)
                 {
                     Transaction anInterestTransaction = new Transaction();
