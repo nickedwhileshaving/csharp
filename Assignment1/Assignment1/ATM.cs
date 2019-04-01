@@ -77,7 +77,10 @@ namespace Assignment1
         }
         private static void chooseAccounts()
         {
-            theLedgerRepository = new LedgerRepository(fileLocation, myList, false);
+            if (theLedgerRepository == null)
+            {
+                theLedgerRepository = new LedgerRepository(fileLocation, myList, false);
+            }
             displayAccountsScreen();
             bool keepRunning = true;
             while (keepRunning)

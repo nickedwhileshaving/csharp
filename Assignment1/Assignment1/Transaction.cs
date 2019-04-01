@@ -14,7 +14,7 @@ namespace Assignment1
     {
         private string accountNumber;
         private int transactionDate;
-        private double transactionAmount;
+        private decimal transactionAmount;
         private bool isPositive;
         private string memo;
 
@@ -36,11 +36,11 @@ namespace Assignment1
             this.transactionDate = theValue;
             return this;
         }
-        public double getTransactionAmount()
+        public decimal getTransactionAmount()
         {
             return this.transactionAmount;
         }
-        public Transaction setTransactionAmount(double theValue)
+        public Transaction setTransactionAmount(decimal theValue)
         {
             this.transactionAmount = theValue;
             return this;

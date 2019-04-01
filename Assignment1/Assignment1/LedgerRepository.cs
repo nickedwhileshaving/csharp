@@ -22,7 +22,7 @@ namespace Assignment1
         private ArrayList accountList;
         private string filePath;
         private int firstDayOfTheYear = 1;
-        private double interestRate = 0.05;
+        private decimal interestRate = Convert.ToDecimal(".05");
 
         public LedgerRepository(string filePathParm, ArrayList accountList, bool isFirstTime)
         {
@@ -39,15 +39,15 @@ namespace Assignment1
                 populateTransactionListFromFile();
             }
         }
-        public double getAccountBalance(string theAccountNumber, int theTransactionDate)
+        public decimal getAccountBalance(string theAccountNumber, int theTransactionDate)
         {
             calculateInterest(theAccountNumber, theTransactionDate);
             return getBalance(theAccountNumber, theTransactionDate);
         }
-        public double getBalance(string theAccountNumber,int thetransactionDate)
+        public decimal getBalance(string theAccountNumber,int thetransactionDate)
         {
             ArrayList aNewArrayList = getListForAnAccount(theAccountNumber);
-            double theBalance = 0.00;
+            decimal theBalance = 0;
             foreach (Transaction item in aNewArrayList)
             {
                 if (item.getIsPositive())
@@ -61,7 +61,7 @@ namespace Assignment1
             }
             return theBalance;
         }
-        public string addDeposit(string theAccountNumber, int theTransactionDate, double transactionAmount)
+        public string addDeposit(string theAccountNumber, int theTransactionDate, decimal transactionAmount)
         {
             calculateInterest(theAccountNumber, theTransactionDate);
             Transaction aTransaction = new Transaction();
@@ -73,10 +73,10 @@ namespace Assignment1
             theTransactionList.Add(aTransaction);
             return null;
         }
-        public string addWithdrawal(string theAccountNumber, int transactionDate, double transactionAmount)
+        public string addWithdrawal(string theAccountNumber, int transactionDate, decimal transactionAmount)
         {
             calculateInterest(theAccountNumber, transactionDate);
-            double theBalance = getBalance(theAccountNumber, transactionDate);
+            decimal theBalance = getBalance(theAccountNumber, transactionDate);
             string theReturn = null;
             if (transactionAmount > theBalance)
             {
@@ -106,7 +106,7 @@ namespace Assignment1
                 {
                     aStreamWriter.WriteLine(anItem.getAccountNumber() + delimiter +
                         anItem.getTransactionDate() + delimiter +
-                        anItem.getTransactionAmount() + delimiter +
+                        anItem.getTransactionAmount().ToString("0.00") + delimiter +
                         anItem.getIsPositive() + delimiter +
                         anItem.getMemo());
                 }
@@ -136,8 +136,9 @@ namespace Assignment1
             int differenceInDays = theTransactionDate - aTransaction.getTransactionDate();
             if (differenceInDays != 0)
             {
-                double theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
-                double interestTransactionAmount = 365 / differenceInDays * theCurrentBalance * interestRate;
+                decimal theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
+                double someIntermediateValue = differenceInDays / 365 * Decimal.ToDouble(theCurrentBalance);
+                decimal interestTransactionAmount = Decimal.Multiply((decimal)someIntermediateValue,interestRate);
                 Transaction anInterestTransaction = new Transaction();
                 anInterestTransaction.setAccountNumber(theAccountNumber)
                     .setTransactionAmount(interestTransactionAmount)
@@ -158,7 +159,7 @@ namespace Assignment1
                 Transaction aTransaction = new Transaction();
                 aTransaction.setAccountNumber(words[0])
                     .setTransactionDate(Int32.Parse(words[1]))
-                    .setTransactionAmount(Convert.ToDouble(words[2]))
+                    .setTransactionAmount(Convert.ToDecimal(words[2]))
                     .setIsPositive(Convert.ToBoolean(words[3]))
                     .setMemo((words[4]));
                 theTransactionList.Add(aTransaction);
@@ -173,7 +174,7 @@ namespace Assignment1
                 aTransaction = new Transaction();
                 aTransaction.setAccountNumber(item)
                     .setIsPositive(true)
-                    .setTransactionAmount(100.00)
+                    .setTransactionAmount(Convert.ToDecimal("100.00"))
                     .setTransactionDate(firstDayOfTheYear)
                     .setMemo("INITIALIZE");
                 theTransactionList.Add(aTransaction);

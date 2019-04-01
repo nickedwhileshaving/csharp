@@ -83,7 +83,7 @@ namespace Assignment1
         }
         private static void runCheckBalanceScreen()
         {
-            double theBalance = 0;
+            decimal theBalance = 0;
             displayCheckBalanceScreen(theBalance);
             bool keepRunning = true;
             while (keepRunning)
@@ -111,7 +111,7 @@ namespace Assignment1
         }
         private static void runAddDepositWithdrawalScreen(bool isDeposit)
         {
-            double theBalance = 0;
+            decimal theBalance = 0;
             if (isDeposit)
             {
                 displayAddDepositScreen();
@@ -144,7 +144,7 @@ namespace Assignment1
                             string theAmountInputValue = Console.ReadLine();
                             try
                             {
-                                Double theTransactionAmount = Double.Parse(theAmountInputValue);
+                                decimal theTransactionAmount = decimal.Parse(theAmountInputValue);
                                 string theReturnValueForAdd = null;
                                 if (isDeposit)
                                 {
@@ -216,14 +216,14 @@ namespace Assignment1
             }
             return aReturnValue;
         }
-        private static void displayCheckBalanceScreen(double theBalance)
+        private static void displayCheckBalanceScreen(decimal theBalance)
         {
             Console.Clear();
             addTopMargin();
             presentRedText(theErrorMessage);
             if (userEnteredTransactionDate != null)
             {
-                Console.WriteLine(someBlanks + "Here is your balance: $" + theBalance);
+                Console.WriteLine(someBlanks + "Here is your balance: " + theBalance.ToString("C"));
             }
             else
             {
