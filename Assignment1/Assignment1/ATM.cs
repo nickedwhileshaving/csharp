@@ -89,7 +89,7 @@ namespace Assignment1
                     case "2":
                     case "3":
                         string theacct = theInputValue;
-                        Account.optionsMenu(theLedgerRepository, theInputValue);
+                        Account.Menu(theLedgerRepository, theInputValue);
                         break;
                     case "4":
                         keepRunning = false;

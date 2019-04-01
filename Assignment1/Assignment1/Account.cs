@@ -21,7 +21,6 @@ namespace Assignment1
         private static string userEnteredTransactionDate = null;
         private static string firstDateOfThisYear = "01/01/2019";
         private static string theDateFormat = "MM/dd/yyyy";
-        private static string theTransactionAmount;
         private static string invalidDateMessage = "That is an invalid date.";
         private static string transactionDatePrompt = "Please enter a transaction date in the format " + theDateFormat + ".";
         private static string theExitPrompt = "Please enter \"x\" to exit.";
@@ -29,7 +28,7 @@ namespace Assignment1
         private static string theTransactionSuccessMessage = "The transaction has been completed.";
         private static int sleepTime = 5000;
 
-        public static void optionsMenu(LedgerRepository aLedgerRepository, string theAccountNumber)
+        public static void Menu(LedgerRepository aLedgerRepository, string theAccountNumber)
         {
             accountNumber = theAccountNumber;
             theLedgerRepository = aLedgerRepository;
@@ -123,7 +122,6 @@ namespace Assignment1
             }
             
             bool keepRunning = true;
-            theTransactionAmount = null;
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
@@ -225,7 +223,7 @@ namespace Assignment1
             presentRedText(theErrorMessage);
             if (userEnteredTransactionDate != null)
             {
-                Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
+                Console.WriteLine(someBlanks + "Here is your balance: $" + theBalance);
             }
             else
             {
