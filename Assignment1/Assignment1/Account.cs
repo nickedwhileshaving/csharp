@@ -182,6 +182,10 @@ namespace Assignment1
                 {
                     displayAddDepositScreen();
                 }
+                else
+                {
+                    displayAddWithdrawalScreen();
+                }
                 userEnteredTransactionDate = null;
             }
         }

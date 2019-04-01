@@ -22,7 +22,7 @@ namespace Assignment1
         private ArrayList accountList;
         private string filePath;
         private int firstDayOfTheYear = 1;
-        private decimal interestRate = Convert.ToDecimal(".05");
+        private double interestRate = 0.05;
 
         public LedgerRepository(string filePathParm, ArrayList accountList, bool isFirstTime)
         {
@@ -137,8 +137,8 @@ namespace Assignment1
             if (differenceInDays != 0)
             {
                 decimal theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
-                double someIntermediateValue = differenceInDays / 365 * Decimal.ToDouble(theCurrentBalance);
-                decimal interestTransactionAmount = Decimal.Multiply((decimal)someIntermediateValue,interestRate);
+                double someIntermediateValue = differenceInDays / (double)365 * Decimal.ToDouble(theCurrentBalance) * interestRate;
+                decimal interestTransactionAmount = Decimal.Multiply((decimal)someIntermediateValue,(decimal)someIntermediateValue);
                 Transaction anInterestTransaction = new Transaction();
                 anInterestTransaction.setAccountNumber(theAccountNumber)
                     .setTransactionAmount(interestTransactionAmount)
