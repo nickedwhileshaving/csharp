@@ -27,6 +27,7 @@ namespace Assignment1
         private static string theExitPrompt = "Please enter \"x\" to exit.";
         private static string theTransactionAmountPrompt = "Now, enter a transaction amount.";
         private static string theTransactionSuccessMessage = "The transaction has been completed.";
+        private static int sleepTime = 5000;
 
         public static void optionsMenu(LedgerRepository aLedgerRepository, string theAccountNumber)
         {
@@ -133,7 +134,8 @@ namespace Assignment1
                 }
                 else
                 {
-                    if (getJulianforGregorian(theInputValue) > 0)
+                    int theTransactionDate = getJulianforGregorian(theInputValue);
+                    if (theTransactionDate > 0)
                     {
                         userEnteredTransactionDate = theInputValue;
                         theBalance = theLedgerRepository.getAccountBalance(accountNumber, getJulianforGregorian(theInputValue));
@@ -145,7 +147,24 @@ namespace Assignment1
                             try
                             {
                                 Double theTransactionAmount = Double.Parse(theAmountInputValue);
-                                presentSuccessfulTransactionMessage();
+                                string theReturnValueForAdd = null;
+                                if (isDeposit)
+                                {
+                                    theReturnValueForAdd = theLedgerRepository.addDeposit(accountNumber, theTransactionDate, theTransactionAmount);
+                                }
+                                else
+                                {
+                                    theReturnValueForAdd = theLedgerRepository.addWithdrawal(accountNumber, theTransactionDate, theTransactionAmount);
+                                }
+                                if (theReturnValueForAdd == null)
+                                {
+                                    presentSuccessfulTransactionMessage();
+                                }
+                                else
+                                {
+                                    presentRedText(theReturnValueForAdd);
+                                    Thread.Sleep(sleepTime);
+                                }
                                 keepRunningForAmount = false;
                                 keepRunning = false;
                             }
@@ -174,7 +193,7 @@ namespace Assignment1
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(someBlanks + theTransactionSuccessMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Thread.Sleep(5000);
+            Thread.Sleep(sleepTime);
         }
         private static int getJulianforGregorian(string aDate)
         {
@@ -203,9 +222,7 @@ namespace Assignment1
         {
             Console.Clear();
             addTopMargin();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(someBlanks + theErrorMessage);
-            Console.ForegroundColor = ConsoleColor.Green;
+            presentRedText(theErrorMessage);
             if (userEnteredTransactionDate != null)
             {
                 Console.WriteLine(someBlanks + "Here is your balance: " + theBalance);
@@ -222,9 +239,7 @@ namespace Assignment1
         {
             Console.Clear();
             addTopMargin();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(someBlanks + theErrorMessage);
-            Console.ForegroundColor = ConsoleColor.Green;
+            presentRedText(theErrorMessage);
             Console.WriteLine(someBlanks + "Enter transaction details for deposit.");
             if (userEnteredTransactionDate != null)
             {
@@ -242,9 +257,7 @@ namespace Assignment1
         {
             Console.Clear();
             addTopMargin();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(someBlanks + theErrorMessage);
-            Console.ForegroundColor = ConsoleColor.Green;
+            presentRedText(theErrorMessage);
             Console.WriteLine(someBlanks + "Enter transaction details for withdrawal.");
             if (userEnteredTransactionDate != null)
             {
@@ -264,6 +277,12 @@ namespace Assignment1
             {
                 Console.WriteLine();
             }
+        }
+        private static void presentRedText(string theText)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theText);
+            Console.ForegroundColor = ConsoleColor.Green;
         }
     }
 }
