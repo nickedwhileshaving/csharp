@@ -40,10 +40,10 @@ namespace Assignment1
                 switch (theInputValue)
                 {
                     case "1":
-                        runAddDepositScreen();
+                        runAddDepositWithdrawalScreen(true);
                         break;
                     case "2":
-                        runAddWithdrawalScreen();
+                        runAddDepositWithdrawalScreen(false);
                         break;
                     case "3":
                         runCheckBalanceScreen();
@@ -109,58 +109,18 @@ namespace Assignment1
                 userEnteredTransactionDate = null;
             }
         }
-        private static void runAddDepositScreen()
+        private static void runAddDepositWithdrawalScreen(bool isDeposit)
         {
             double theBalance = 0;
-            displayAddDepositScreen();
-            bool keepRunning = true;
-            theTransactionAmount = null;
-            while (keepRunning)
+            if (isDeposit)
             {
-                string theInputValue = Console.ReadLine();
-                theErrorMessage = "";
-                if ("x".Equals(theInputValue))
-                {
-                    keepRunning = false;
-                }
-                else
-                {
-                    if (getJulianforGregorian(theInputValue) > 0)
-                    {
-                        userEnteredTransactionDate = theInputValue;
-                        theBalance = theLedgerRepository.getAccountBalance(accountNumber, getJulianforGregorian(theInputValue));
-                        Console.WriteLine(someBlanks + theTransactionAmountPrompt);
-                        bool keepRunningForAmount = true;
-                        while (keepRunningForAmount)
-                        {
-                            string theAmountInputValue = Console.ReadLine();
-                            try
-                            {
-                                Double theTransactionAmount = Double.Parse(theAmountInputValue);
-                                presentSuccessfulTransactionMessage();
-                                keepRunningForAmount = false;
-                                keepRunning = false;
-                            }
-                            catch (Exception anex)
-                            {
-                                userEnteredTransactionDate = null;
-                                keepRunningForAmount = false;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        theErrorMessage = invalidDateMessage;
-                    }
-                }
                 displayAddDepositScreen();
-                userEnteredTransactionDate = null;
             }
-        }
-        private static void runAddWithdrawalScreen()
-        {
-            double theBalance = 0;
-            displayAddWithdrawalScreen();
+            else
+            {
+                displayAddWithdrawalScreen();
+            }
+            
             bool keepRunning = true;
             theTransactionAmount = null;
             while (keepRunning)
@@ -201,10 +161,14 @@ namespace Assignment1
                         theErrorMessage = invalidDateMessage;
                     }
                 }
-                displayAddWithdrawalScreen();
+                if (isDeposit)
+                {
+                    displayAddDepositScreen();
+                }
                 userEnteredTransactionDate = null;
             }
         }
+        
         private static void presentSuccessfulTransactionMessage()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
