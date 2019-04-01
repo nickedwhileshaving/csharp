@@ -139,13 +139,16 @@ namespace Assignment1
                 decimal theCurrentBalance = getBalance(theAccountNumber, theTransactionDate);
                 double someIntermediateValue = differenceInDays / (double)365 * Decimal.ToDouble(theCurrentBalance) * interestRate;
                 decimal interestTransactionAmount = Decimal.Multiply((decimal)someIntermediateValue,(decimal)someIntermediateValue);
-                Transaction anInterestTransaction = new Transaction();
-                anInterestTransaction.setAccountNumber(theAccountNumber)
-                    .setTransactionAmount(interestTransactionAmount)
-                    .setTransactionDate(theTransactionDate)
-                    .setIsPositive(true)
-                    .setMemo("INTEREST");
-                theTransactionList.Add(anInterestTransaction);
+                if (interestTransactionAmount > (decimal)0)
+                {
+                    Transaction anInterestTransaction = new Transaction();
+                    anInterestTransaction.setAccountNumber(theAccountNumber)
+                        .setTransactionAmount(interestTransactionAmount)
+                        .setTransactionDate(theTransactionDate)
+                        .setIsPositive(true)
+                        .setMemo("INTEREST");
+                    theTransactionList.Add(anInterestTransaction);
+                }
             }
         }
         private void populateTransactionListFromFile()
