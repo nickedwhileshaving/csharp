@@ -19,6 +19,8 @@ namespace Assignment2
         private static string fileLocation;
         private static ConsoleColor theBeginningConsoleColor;
         ArrayList anEmployeeArrayList;
+        private string theErrorMessage;
+        private String someBlanks = "                             ";
 
         public Payroll()
         {
@@ -36,9 +38,11 @@ namespace Assignment2
             if (fileLocation != null)
             {
                 Payroll aPayroll = new Payroll();
+                /*
                 aPayroll.ID = "THE ID";
                 aPayroll.Name = "THE NAME";
                 anArrayList.Add(aPayroll);
+                */
                 aPayroll.Menu();
             }
             else
@@ -49,8 +53,60 @@ namespace Assignment2
         }
         private void Menu()
         {
-
+            displayMenuScreen();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                switch (theInputValue)
+                {
+                    case "1":
+                        PopulateEmployees();
+                        break;
+                    case "2":
+                        SelectEmployee();
+                        break;
+                    case "3":
+                        SaveEmployee();
+                        break;
+                    case "4":
+                        LoadEmployees();
+                        break;
+                    case "5":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
+                }
+                displayMenuScreen();
+            }
         }
+        private void displayMenuScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Welcome to Employee Maintenance!");
+            Console.WriteLine(someBlanks + "Please enter a number corresponding to the numbers below.");
+            Console.WriteLine(someBlanks + "1. Populate Employees");
+            Console.WriteLine(someBlanks + "2. Select Employee");
+            Console.WriteLine(someBlanks + "3. Save Employees");
+            Console.WriteLine(someBlanks + "4. Load Employees");
+            Console.WriteLine(someBlanks + "5. Exit");
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
+        private void addTopMargin()
+        {
+            for (int linecount = 1; linecount < 10; linecount++)
+            {
+                Console.WriteLine();
+            }
+        }
+
         private void PopulateEmployees()
         {
 
@@ -66,7 +122,7 @@ namespace Assignment2
             formatter.Serialize(stream, anEmployeeArrayList);
             stream.Close();
         }
-        private void LoadEmployee()
+        private void LoadEmployees()
         {
             Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
             IFormatter formatter = new BinaryFormatter();
