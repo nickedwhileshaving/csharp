@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,24 +13,21 @@ namespace Assignment2
         public new void menu()
         {
             displayScreen();
+            Console.WriteLine(someBlanks + "Enter Hours");
             bool keepRunning = true;
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                switch (theInputValue.ToLower())
+                this.hours = Int32.Parse(theInputValue);
+                Console.WriteLine(someBlanks + "Enter Rate");
+                while (keepRunning)
                 {
-                    case "h":
-                        Hourly_Employee anHourlyEmployee = new Hourly_Employee();
-                        anHourlyEmployee.menu();
-                        break;
-                    case "x":
-                        keepRunning = false;
-                        break;
-                    default:
-                        theErrorMessage = "Please enter a valid menu option.";
-                        break;
+                    theInputValue = Console.ReadLine();
+                    this.rate = float.Parse(theInputValue, CultureInfo.InvariantCulture.NumberFormat);
+                    presentSuccessfulTransactionMessage("The Hourly Employee has been added.");
+                    this.isFilledOut = true;
+                    keepRunning = false;
                 }
-                displayScreen();
             }
         }
         private void displayScreen()
@@ -39,9 +37,7 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Enter");
-            Console.WriteLine(someBlanks + "E(X)it");
-            Console.WriteLine();
+            Console.WriteLine(someBlanks + "Welcome to the Hourly Employee Screen.");
             theErrorMessage = "";
         }
         public new void computeGross()

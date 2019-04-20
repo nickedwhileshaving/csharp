@@ -2,25 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Assignment2
 {
    public class Employee
-        {
+   {
         protected bool isFilledOut;
         protected String someBlanks = "                             ";
         protected string theErrorMessage;
+        private int sleepTime = 5000;
         /*********************
              Attributes
         *********************/
-        float rate = 30.0f;
-        float taxrate = 0.2f;
-        int hours = 45;
-        float gross = 0.0f;
-        float tax = 0.0f;
-        float net = 0.0f;
-        float net_percent = 0.0f;
+        protected float rate = 30.0f;
+        protected float taxrate = 0.2f;
+        protected int hours = 45;
+        protected float gross = 0.0f;
+        protected float tax = 0.0f;
+        protected float net = 0.0f;
+        protected float net_percent = 0.0f;
 
         //End Attributes
 
@@ -84,6 +86,13 @@ namespace Assignment2
         protected void setIsFilledOut(bool pIsFilledOut)
         {
             isFilledOut = pIsFilledOut;
+        }
+        protected void presentSuccessfulTransactionMessage(string theTransactionSuccessMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(someBlanks + theTransactionSuccessMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Thread.Sleep(sleepTime);
         }
     }
 }
