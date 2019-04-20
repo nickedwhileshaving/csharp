@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
+    [Serializable]
     class Salary_Employee : Employee
     {
-
         public new void menu()
         {
             displayScreen();

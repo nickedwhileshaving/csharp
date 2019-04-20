@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
+    [Serializable]
     class Commission_Employee : Employee
     {
         private int numberOfItemsSold;
@@ -46,7 +47,6 @@ namespace Assignment2
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Welcome to the Commission Employee Screen or 'X' to exit.");
-            Console.WriteLine(someBlanks + "Or 'X' to exit n.");
             theErrorMessage = "";
         }
         

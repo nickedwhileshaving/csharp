@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
-   public class Employee
-   {
+    [Serializable]
+    public class Employee
+    {
         protected bool isFilledOut;
         protected String someBlanks = "                             ";
         protected string theErrorMessage;

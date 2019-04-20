@@ -11,7 +11,6 @@ using System.Collections;
 
 namespace Assignment2
 {
-    [Serializable]
     class Payroll
     {
         public String ID;

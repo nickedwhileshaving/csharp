@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Assignment2
 {
+    [Serializable]
     class Hourly_Employee : Employee
     {
-        
         public new void menu()
         {
             displayScreen();
