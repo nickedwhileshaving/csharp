@@ -8,10 +8,6 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {
-    /*
-     * This class controls the screens and validation for the account level screens.
-     * It hangs onto the LedgerRepository and calls upon it when it needs to.
-     */
     class Account
     {
         private static String someBlanks = "                             ";

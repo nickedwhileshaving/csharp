@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace Assignment1
 {    
-    /*
-     * This class is responsible for keeping track of all transactions that are in memory
-     * for all accounts.
-     * It's responsible for reading the previous data from a disk file.  It is responsible
-     * for pushing data out to the text file, too.
-     */
+    
     class LedgerRepository
     {
         private string delimiter = "|";
@@ -156,8 +151,6 @@ namespace Assignment1
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines)
             {
-                //process each record
-                //store into  arrayList
                 string[] words = line.Split('|');
                 Transaction aTransaction = new Transaction();
                 aTransaction.setAccountNumber(words[0])
