@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
+using System.Threading;
 
 namespace Assignment2
 {
@@ -172,6 +173,36 @@ namespace Assignment2
         }
         private void SaveEmployee()
         {
+            int aCountOfHourlyEmployees = 0;
+            int aCountOfSalaryEmployees = 0;
+            int aCountOfCommissionEmployees = 0;
+            foreach (Employee anEmployee in anEmployeeArrayList)
+            {
+                if (anEmployee.GetType().FullName.Contains("Hourly"))
+                {
+                    aCountOfHourlyEmployees++;
+                }
+                if (anEmployee.GetType().FullName.Contains("Salary"))
+                {
+                    aCountOfSalaryEmployees++;
+                }
+                if (anEmployee.GetType().FullName.Contains("Commission"))
+                {
+                    aCountOfCommissionEmployees++;
+                }
+                //Console.WriteLine(anEmployee.GetType().FullName);
+            }
+            if (aCountOfCommissionEmployees > 0 &&
+                aCountOfHourlyEmployees > 0 &&
+                aCountOfSalaryEmployees > 0)
+            {
+                Console.WriteLine("we have at least one of each type.");
+            }
+            else
+            {
+                Console.WriteLine("we do not have at least one of each type.");
+            }
+            Thread.Sleep(5000);
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
             formatter.Serialize(stream, anEmployeeArrayList);
