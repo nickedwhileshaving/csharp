@@ -121,7 +121,6 @@ namespace Assignment2
                         anHourlyEmployee.menu();
                         if (anHourlyEmployee.getIsFilledOut())
                         {
-
                             anEmployeeArrayList.Add(anHourlyEmployee);
                         }
                         break;

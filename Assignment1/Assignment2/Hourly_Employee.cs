@@ -18,15 +18,22 @@ namespace Assignment2
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                this.hours = Int32.Parse(theInputValue);
-                Console.WriteLine(someBlanks + "Enter Rate");
-                while (keepRunning)
+                if (theInputValue.ToLower().Equals("x"))
                 {
-                    theInputValue = Console.ReadLine();
-                    this.rate = float.Parse(theInputValue, CultureInfo.InvariantCulture.NumberFormat);
-                    presentSuccessfulTransactionMessage("The Hourly Employee has been added.");
-                    this.isFilledOut = true;
                     keepRunning = false;
+                }
+                else
+                {
+                    this.hours = Int32.Parse(theInputValue);
+                    Console.WriteLine(someBlanks + "Enter Rate");
+                    while (keepRunning)
+                    {
+                        theInputValue = Console.ReadLine();
+                        this.rate = float.Parse(theInputValue, CultureInfo.InvariantCulture.NumberFormat);
+                        presentSuccessfulTransactionMessage("The Hourly Employee has been added.");
+                        this.isFilledOut = true;
+                        keepRunning = false;
+                    }
                 }
             }
         }
@@ -37,7 +44,7 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Welcome to the Hourly Employee Screen.");
+            Console.WriteLine(someBlanks + "Welcome to the Hourly Employee Screen or 'X' to exit.");
             theErrorMessage = "";
         }
         public new void computeGross()

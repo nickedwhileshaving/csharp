@@ -8,27 +8,33 @@ namespace Assignment2
 {
     class Salary_Employee : Employee
     {
+
         public new void menu()
         {
             displayScreen();
+            Console.WriteLine(someBlanks + "Are you (S)taff or an (E)xecutive?");
             bool keepRunning = true;
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                switch (theInputValue.ToLower())
+                if (theInputValue.ToLower().Equals("x"))
                 {
-                    case "h":
-                        Hourly_Employee anHourlyEmployee = new Hourly_Employee();
-                        anHourlyEmployee.menu();
-                        break;
-                    case "x":
-                        keepRunning = false;
-                        break;
-                    default:
-                        theErrorMessage = "Please enter a valid menu option.";
-                        break;
+                    keepRunning = false;
                 }
-                displayScreen();
+                else
+                {
+                    if (theInputValue.ToLower().Equals("s"))
+                    {
+                        this.gross = 50000;
+                    }
+                    else
+                    {
+                        this.gross = 100000;
+                    }
+                    presentSuccessfulTransactionMessage("The Salary Employee has been added.");
+                    this.isFilledOut = true;
+                    keepRunning = false;
+                }
             }
         }
         private void displayScreen()
@@ -38,9 +44,7 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Enter");
-            Console.WriteLine(someBlanks + "E(X)it");
-            Console.WriteLine();
+            Console.WriteLine(someBlanks + "Welcome to the Salary Employee Screen or 'X' to exit.");
             theErrorMessage = "";
         }
         public new void computeGross()
