@@ -109,7 +109,46 @@ namespace Assignment2
 
         private void PopulateEmployees()
         {
-
+            displayPopulateEmployeesScreen();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                switch (theInputValue.ToLower())
+                {
+                    case "h":
+                        //PopulateEmployees();
+                        break;
+                    case "s":
+                        //SelectEmployee();
+                        break;
+                    case "c":
+                        //SaveEmployee();
+                        break;
+                    case "x":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
+                }
+                displayPopulateEmployeesScreen();
+            }
+        }
+        private void displayPopulateEmployeesScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Enter Employee Type");
+            Console.WriteLine(someBlanks + "(H)ourly");
+            Console.WriteLine(someBlanks + "(S)alary");
+            Console.WriteLine(someBlanks + "(C)ommission");
+            Console.WriteLine(someBlanks + "E(X)it");
+            Console.WriteLine();
+            theErrorMessage = "";
         }
         private void SelectEmployee()
         {
