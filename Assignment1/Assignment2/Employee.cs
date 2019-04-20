@@ -8,6 +8,7 @@ namespace Assignment2
 {
    public class Employee
         {
+        protected bool isFilledOut;
         protected String someBlanks = "                             ";
         protected string theErrorMessage;
         /*********************
@@ -73,6 +74,16 @@ namespace Assignment2
             {
                 Console.WriteLine();
             }
+        }
+
+        public bool getIsFilledOut()
+        {
+            return isFilledOut;
+        }
+
+        protected void setIsFilledOut(bool pIsFilledOut)
+        {
+            isFilledOut = pIsFilledOut;
         }
     }
 }

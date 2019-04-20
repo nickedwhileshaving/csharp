@@ -43,5 +43,24 @@ namespace Assignment2
             Console.WriteLine();
             theErrorMessage = "";
         }
+        public new void computeGross()
+        {
+
+        }
+
+        public new void computeTax()
+        {
+
+        }
+
+        public new void computeNet()
+        {
+
+        }
+
+        public new void computeNetperc()
+        {
+
+        }
     }
 }

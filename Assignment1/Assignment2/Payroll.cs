@@ -119,14 +119,29 @@ namespace Assignment2
                     case "h":
                         Hourly_Employee anHourlyEmployee = new Hourly_Employee();
                         anHourlyEmployee.menu();
+                        if (anHourlyEmployee.getIsFilledOut())
+                        {
+
+                            anEmployeeArrayList.Add(anHourlyEmployee);
+                        }
                         break;
                     case "s":
                         Salary_Employee aSalaryEmployee = new Salary_Employee();
                         aSalaryEmployee.menu();
+                        if (aSalaryEmployee.getIsFilledOut())
+                        {
+
+                            anEmployeeArrayList.Add(aSalaryEmployee);
+                        }
                         break;
                     case "c":
                         Commission_Employee aCommissionEmployee = new Commission_Employee();
                         aCommissionEmployee.menu();
+                        if (aCommissionEmployee.getIsFilledOut())
+                        {
+
+                            anEmployeeArrayList.Add(aCommissionEmployee);
+                        }
                         break;
                     case "x":
                         keepRunning = false;
