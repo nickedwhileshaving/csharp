@@ -117,13 +117,16 @@ namespace Assignment2
                 switch (theInputValue.ToLower())
                 {
                     case "h":
-                        //PopulateEmployees();
+                        Hourly_Employee anHourlyEmployee = new Hourly_Employee();
+                        anHourlyEmployee.menu();
                         break;
                     case "s":
-                        //SelectEmployee();
+                        Salary_Employee aSalaryEmployee = new Salary_Employee();
+                        aSalaryEmployee.menu();
                         break;
                     case "c":
-                        //SaveEmployee();
+                        Commission_Employee aCommissionEmployee = new Commission_Employee();
+                        aCommissionEmployee.menu();
                         break;
                     case "x":
                         keepRunning = false;
