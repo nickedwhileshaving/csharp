@@ -95,5 +95,39 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Green;
             Thread.Sleep(sleepTime);
         }
+        private void selectEmployeeDetails()
+        {
+            displayEmployeeDetails();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                switch (theInputValue)
+                {
+                    case "x":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
+                }
+                displayEmployeeDetails();
+            }
+        }
+        private void displayEmployeeDetails()
+        {
+            displayEmployeeDetailsHeader();
+        }
+        private void displayEmployeeDetailsHeader()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Employee Details screen");
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
     }
 }

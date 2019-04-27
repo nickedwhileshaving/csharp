@@ -66,5 +66,16 @@ namespace Assignment2
         {
             
         }
+        private void displayEmployeeDetails()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Salary Screen");
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
     }
 }

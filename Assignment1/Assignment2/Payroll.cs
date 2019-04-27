@@ -173,9 +173,19 @@ namespace Assignment2
         {
             displaySelectEmployeesScreen();
             bool keepRunning = true;
+            int arrayCount = anEmployeeArrayList.Count;
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
+                int theNumeric;
+                bool isNumeric = int.TryParse(theInputValue, out theNumeric);
+                if (isNumeric)
+                {
+                    if (theNumeric > 0 && theNumeric < arrayCount + 1)
+                    {
+
+                    }
+                }
                 switch (theInputValue.ToLower())
                 {
                     case "x":
