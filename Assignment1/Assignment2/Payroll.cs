@@ -66,7 +66,14 @@ namespace Assignment2
                         PopulateEmployees();
                         break;
                     case "2":
-                        SelectEmployee();
+                        if (CanSelectEmployees())
+                        {
+                            SelectEmployeesScreen();
+                        }
+                        else
+                        {
+                            theErrorMessage = "There are no employees to display.";
+                        }
                         break;
                     case "3":
                         SaveEmployee();
@@ -161,6 +168,44 @@ namespace Assignment2
                 displayPopulateEmployeesScreen();
             }
         }
+
+        private void SelectEmployeesScreen()
+        {
+            displaySelectEmployeesScreen();
+            bool keepRunning = true;
+            while (keepRunning)
+            {
+                string theInputValue = Console.ReadLine();
+                switch (theInputValue.ToLower())
+                {
+                    case "x":
+                        keepRunning = false;
+                        break;
+                    default:
+                        theErrorMessage = "Please enter a valid menu option.";
+                        break;
+                }
+                displaySelectEmployeesScreen();
+            }
+        }
+
+        private void displaySelectEmployeesScreen()
+        {
+            Console.Clear();
+            addTopMargin();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(someBlanks + theErrorMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(someBlanks + "Please select an employee to view.  Enter 'X' to exit.");
+            int theCounter = 1;
+            foreach (Employee anEmployee in anEmployeeArrayList)
+            {
+                Console.WriteLine(someBlanks + "(" + theCounter + ") Employee Type: " + getEmployeeType(anEmployee.GetType()));
+                theCounter++;
+            }
+            Console.WriteLine();
+            theErrorMessage = "";
+        }
         private void displayPopulateEmployeesScreen()
         {
             Console.Clear();
@@ -176,9 +221,14 @@ namespace Assignment2
             Console.WriteLine();
             theErrorMessage = "";
         }
-        private void SelectEmployee()
+        private bool CanSelectEmployees()
         {
-
+            bool theReturnValue = false;
+            foreach (Employee anEmployee in anEmployeeArrayList)
+            {
+                theReturnValue = true;
+            }
+            return theReturnValue;
         }
         private void SaveEmployee()
         {
@@ -211,6 +261,22 @@ namespace Assignment2
             return theReturnValue;
         }
 
+        private string getEmployeeType(Type aType)
+        {
+            if (aType.FullName.Contains("Hourly"))
+            {
+                return "Hourly";
+            }
+            if (aType.FullName.Contains("Salary"))
+            {
+                return "Salary";
+            }
+            if (aType.FullName.Contains("Commission"))
+            {
+                return "Commission";
+            }
+            return "";
+        }
         private bool isThereAnEmployeeOfEachType()
         {
             bool theReturnValue = false;
@@ -219,15 +285,15 @@ namespace Assignment2
             bool atLeastOneCommission = false;
             foreach (Employee anEmployee in anEmployeeArrayList)
             {
-                if (anEmployee.GetType().FullName.Contains("Hourly"))
+                if (getEmployeeType(anEmployee.GetType()).Equals("Hourly"))
                 {
                     atLeastOneHourly = true;
                 }
-                if (anEmployee.GetType().FullName.Contains("Salary"))
+                if (getEmployeeType(anEmployee.GetType()).Equals("Salary"))
                 {
                     atLeastOneSalary = true;
                 }
-                if (anEmployee.GetType().FullName.Contains("Commission"))
+                if (getEmployeeType(anEmployee.GetType()).Equals("Commission"))
                 {
                     atLeastOneCommission = true;
                 }
