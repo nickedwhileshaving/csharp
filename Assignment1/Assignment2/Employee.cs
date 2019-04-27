@@ -125,7 +125,7 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Employee Details screen");
+            Console.WriteLine(someBlanks + "Employee Details screen.  Enter 'X' to exit.");
             Console.WriteLine();
             theErrorMessage = "";
         }

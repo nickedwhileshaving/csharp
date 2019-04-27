@@ -75,14 +75,9 @@ namespace Assignment2
         }
         protected override void displayEmployeeDetails()
         {
-            Console.Clear();
-            addTopMargin();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(someBlanks + theErrorMessage);
-            Console.ForegroundColor = ConsoleColor.Green;
+            displayEmployeeDetailsHeader();
             Console.WriteLine(someBlanks + "commission Screen");
             Console.WriteLine();
-            theErrorMessage = "";
         }
     }
 }
