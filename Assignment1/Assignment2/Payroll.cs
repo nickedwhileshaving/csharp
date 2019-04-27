@@ -18,9 +18,10 @@ namespace Assignment2
         public String Name;
         private string fileLocation;
         private static ConsoleColor theBeginningConsoleColor;
-        ArrayList anEmployeeArrayList;
+        private ArrayList anEmployeeArrayList;
         private string theErrorMessage;
         private String someBlanks = "                             ";
+        private int sleepTime = 3000;
 
         public Payroll()
         {
@@ -74,6 +75,10 @@ namespace Assignment2
                         if (!LoadEmployees())
                         {
                             theErrorMessage = "The employee file does not exist.";
+                        }
+                        else
+                        {
+                            presentSuccessfulTransactionMessage("The employees have been loaded.");
                         }
                         break;
                     case "5":
@@ -177,19 +182,20 @@ namespace Assignment2
         }
         private void SaveEmployee()
         {
-            if (doWeHaveAnEmployeeOfEachType())
+           // if (doWeHaveAnEmployeeOfEachType())
+            if (isThereAnEmployeeOfEachType())
             {
-                Console.WriteLine("We have at least one of each type.");
+                presentSuccessfulTransactionMessage("The employees have been saved.");
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
+                formatter.Serialize(stream, anEmployeeArrayList);
+                stream.Close();
             }
             else
             {
                 Console.WriteLine("We do not have at least one of each type.");
             }
             Thread.Sleep(3000);
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
-            formatter.Serialize(stream, anEmployeeArrayList);
-            stream.Close();
         }
         private bool LoadEmployees()
         {
@@ -197,13 +203,44 @@ namespace Assignment2
             if (File.Exists(fileLocation))
             {
                 theReturnValue = true;
-                Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
+                Stream stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
                 IFormatter formatter = new BinaryFormatter();
-                stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
                 anEmployeeArrayList = (ArrayList)formatter.Deserialize(stream);
+                stream.Close();
             }
             return theReturnValue;
         }
+
+        private bool isThereAnEmployeeOfEachType()
+        {
+            bool theReturnValue = false;
+            bool atLeastOneHourly = false;
+            bool atLeastOneSalary = false;
+            bool atLeastOneCommission = false;
+            foreach (Employee anEmployee in anEmployeeArrayList)
+            {
+                if (anEmployee.GetType().FullName.Contains("Hourly"))
+                {
+                    atLeastOneHourly = true;
+                }
+                if (anEmployee.GetType().FullName.Contains("Salary"))
+                {
+                    atLeastOneSalary = true;
+                }
+                if (anEmployee.GetType().FullName.Contains("Commission"))
+                {
+                    atLeastOneCommission = true;
+                }
+                if (atLeastOneHourly &&
+                    atLeastOneSalary &&
+                    atLeastOneCommission)
+                {
+                    theReturnValue = true;
+                }
+            }
+            return theReturnValue;
+        }
+
         private bool doWeHaveAnEmployeeOfEachType()
         {
             bool returnValue = false;
@@ -240,6 +277,13 @@ namespace Assignment2
         public void setFileLocation(string pFileLocation)
         {
             this.fileLocation = pFileLocation;
+        }
+        protected void presentSuccessfulTransactionMessage(string theTransactionSuccessMessage)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(someBlanks + theTransactionSuccessMessage);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Thread.Sleep(sleepTime);
         }
     }
 }
