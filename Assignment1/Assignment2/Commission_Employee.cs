@@ -49,26 +49,6 @@ namespace Assignment2
             Console.WriteLine(someBlanks + "Welcome to the Commission Employee Screen or 'X' to exit.");
             theErrorMessage = "";
         }
-        
-        public new void computeGross()
-        {
-
-        }
-
-        public new void computeTax()
-        {
-
-        }
-
-        public new void computeNet()
-        {
-
-        }
-
-        public new void computeNetperc()
-        {
-
-        }
         public new void selectEmployeeDetails()
         {
             base.selectEmployeeDetails();
@@ -76,6 +56,10 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
+            computeGross();
+            computeTax();
+            computeNet();
+            computeNetperc();
             Console.WriteLine(someBlanks + "Commission Employee Details");
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);

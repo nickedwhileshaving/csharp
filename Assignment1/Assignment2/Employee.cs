@@ -10,7 +10,8 @@ namespace Assignment2
     [Serializable]
     public class Employee
     {
-        protected bool isFilledOut;
+        public bool isFilledOut;
+        public bool isLoaded;
         protected String someBlanks = "                             ";
         protected string theErrorMessage;
         private int sleepTime = 1000;

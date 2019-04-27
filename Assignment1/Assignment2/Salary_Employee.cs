@@ -47,25 +47,6 @@ namespace Assignment2
             Console.WriteLine(someBlanks + "Welcome to the Salary Employee Screen or 'X' to exit.");
             theErrorMessage = "";
         }
-        public new void computeGross()
-        {
-           
-        }
-
-        public new void computeTax()
-        {
-            
-        }
-
-        public new void computeNet()
-        {
-            
-        }
-
-        public new void computeNetperc()
-        {
-            
-        }
         public new void selectEmployeeDetails()
         {
             base.selectEmployeeDetails();
@@ -73,15 +54,10 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
-/*
- *         protected float rate = 30.0f;
-        protected float taxrate = 0.2f;
-        protected int hours = 45;
-        protected float gross = 0.0f;
-        protected float tax = 0.0f;
-        protected float net = 0.0f;
-        protected float net_percent = 0.0f;
-        */
+            computeGross();
+            computeTax();
+            computeNet();
+            computeNetperc();
             Console.WriteLine(someBlanks + "Salary Employee Details");
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);

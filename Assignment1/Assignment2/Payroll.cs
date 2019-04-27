@@ -147,7 +147,6 @@ namespace Assignment2
                         aCommissionEmployee.menu();
                         if (aCommissionEmployee.getIsFilledOut())
                         {
-
                             anEmployeeArrayList.Add(aCommissionEmployee);
                         }
                         break;
@@ -211,9 +210,18 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(someBlanks + "Please select an employee to view.  Enter 'X' to exit.");
             int theCounter = 1;
+            string isLoadedString = "";
             foreach (Employee anEmployee in anEmployeeArrayList)
             {
-                Console.WriteLine(someBlanks + "(" + theCounter + ") Employee Type: " + getEmployeeType(anEmployee.GetType()));
+                if (anEmployee.isLoaded)
+                {
+                    isLoadedString = "[LOADED] ";
+                }
+                else
+                {
+                    isLoadedString = "";
+                }
+                Console.WriteLine(someBlanks + "(" + theCounter + ") " + isLoadedString + "Employee Type: " + getEmployeeType(anEmployee.GetType()));
                 theCounter++;
             }
             Console.WriteLine();
@@ -269,6 +277,10 @@ namespace Assignment2
                 Stream stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
                 IFormatter formatter = new BinaryFormatter();
                 anEmployeeArrayList = (ArrayList)formatter.Deserialize(stream);
+                foreach(Employee anEmployee in anEmployeeArrayList)
+                {
+                    anEmployee.isLoaded = true;
+                }
                 stream.Close();
             }
             return theReturnValue;

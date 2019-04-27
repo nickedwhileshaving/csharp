@@ -47,25 +47,6 @@ namespace Assignment2
             Console.WriteLine(someBlanks + "Welcome to the Hourly Employee Screen or 'X' to exit.");
             theErrorMessage = "";
         }
-        public new void computeGross()
-        {
-
-        }
-
-        public new void computeTax()
-        {
-
-        }
-
-        public new void computeNet()
-        {
-
-        }
-
-        public new void computeNetperc()
-        {
-
-        }
         public new void selectEmployeeDetails()
         {
             base.selectEmployeeDetails();
@@ -73,13 +54,29 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
+            computeGross();
+            computeTax();
+            computeNet();
+            computeNetperc();
             Console.WriteLine(someBlanks + "Hourly Employee Details");
+            Console.WriteLine(someBlanks + "Hours: " + hours + " Pay Rate: " + rate + " Tax Rate: " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
-            Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
+            Console.WriteLine(someBlanks + "Calculate Tax : " + tax);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
             Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
-            Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
+        }
+        public new void computeGross()
+        {
+            float standardgrosspay;
+            float overtimegrosspay = 0f;
+            int hoursOverForty = hours - 40;
+            standardgrosspay = 40 * rate;
+            if (hoursOverForty > 0)
+            {
+                overtimegrosspay = hoursOverForty * rate * 1.5f;
+            }
+            gross = standardgrosspay + overtimegrosspay;
         }
     }
 }
