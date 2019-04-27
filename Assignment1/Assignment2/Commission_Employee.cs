@@ -61,12 +61,18 @@ namespace Assignment2
             computeNet();
             computeNetperc();
             Console.WriteLine(someBlanks + "Commission Employee Details");
+            Console.WriteLine(someBlanks + "# Sold: " + numberOfItemsSold + " Unit Price: " + unitPriceOfItem + " Tax Rate: " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
             Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
             Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
+        }
+        public new void computeGross()
+        {
+            double aTempDouble = .5 * numberOfItemsSold;
+            gross = (float) ( Decimal.Multiply(unitPriceOfItem, (decimal)aTempDouble));
         }
     }
 }

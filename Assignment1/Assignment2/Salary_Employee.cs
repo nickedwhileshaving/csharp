@@ -25,11 +25,11 @@ namespace Assignment2
                 {
                     if (theInputValue.ToLower().Equals("s"))
                     {
-                        this.gross = 50000;
+                        this.gross = 50000f;
                     }
                     else
                     {
-                        this.gross = 100000;
+                        this.gross = 100000f;
                     }
                     presentSuccessfulTransactionMessage("The Salary Employee has been added.");
                     this.isFilledOut = true;
@@ -54,11 +54,11 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
-            computeGross();
             computeTax();
             computeNet();
             computeNetperc();
             Console.WriteLine(someBlanks + "Salary Employee Details");
+            Console.WriteLine(someBlanks + "Gross: " + gross + " Tax Rate: " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
