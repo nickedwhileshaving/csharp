@@ -73,7 +73,20 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
-            Console.WriteLine(someBlanks + "Salary Screen");
+/*
+ *         protected float rate = 30.0f;
+        protected float taxrate = 0.2f;
+        protected int hours = 45;
+        protected float gross = 0.0f;
+        protected float tax = 0.0f;
+        protected float net = 0.0f;
+        protected float net_percent = 0.0f;
+        */
+            Console.WriteLine(someBlanks + "Welcome to the Salary Employee Screen");
+            Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
+            Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
+            Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
+            Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
         }
     }
