@@ -114,11 +114,11 @@ namespace Assignment2
                 displayEmployeeDetails();
             }
         }
-        private void displayEmployeeDetails()
+        protected virtual void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
         }
-        private void displayEmployeeDetailsHeader()
+        protected void displayEmployeeDetailsHeader()
         {
             Console.Clear();
             addTopMargin();

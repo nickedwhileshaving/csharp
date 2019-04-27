@@ -69,14 +69,18 @@ namespace Assignment2
         {
 
         }
-        private void displayEmployeeDetails()
+        public new void selectEmployeeDetails()
+        {
+            base.selectEmployeeDetails();
+        }
+        protected override void displayEmployeeDetails()
         {
             Console.Clear();
             addTopMargin();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(someBlanks + theErrorMessage);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(someBlanks + "Commission Screen");
+            Console.WriteLine(someBlanks + "commission Screen");
             Console.WriteLine();
             theErrorMessage = "";
         }

@@ -66,7 +66,11 @@ namespace Assignment2
         {
             
         }
-        private void displayEmployeeDetails()
+        public new void selectEmployeeDetails()
+        {
+            base.selectEmployeeDetails();
+        }
+        protected override void displayEmployeeDetails()
         {
             Console.Clear();
             addTopMargin();

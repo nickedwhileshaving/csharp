@@ -177,20 +177,21 @@ namespace Assignment2
                     if (theNumeric > 0 && theNumeric < arrayCount + 1)
                     {
                         theNumeric--;
-                        Employee anEmployee = null;
                         if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Hourly"))
                         {
-                            anEmployee = (Hourly_Employee)anEmployeeArrayList[theNumeric];
+                            Hourly_Employee anEmployee = (Hourly_Employee)anEmployeeArrayList[theNumeric];
+                            anEmployee.selectEmployeeDetails();
                         }
                         if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Salary"))
                         {
-                            anEmployee = (Salary_Employee)anEmployeeArrayList[theNumeric];
+                            Salary_Employee anEmployee = (Salary_Employee)anEmployeeArrayList[theNumeric];
+                            anEmployee.selectEmployeeDetails();
                         }
                         if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Commission"))
                         {
-                            anEmployee = (Commission_Employee)anEmployeeArrayList[theNumeric];
+                            Commission_Employee anEmployee = (Commission_Employee)anEmployeeArrayList[theNumeric];
+                            anEmployee.selectEmployeeDetails();
                         }
-                        anEmployee.selectEmployeeDetails();
                     }
                 }
                 switch (theInputValue.ToLower())
