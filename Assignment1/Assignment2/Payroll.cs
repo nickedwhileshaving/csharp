@@ -170,27 +170,33 @@ namespace Assignment2
             while (keepRunning)
             {
                 string theInputValue = Console.ReadLine();
-                int theNumeric;
-                bool isNumeric = int.TryParse(theInputValue, out theNumeric);
-                if (isNumeric)
-                {
-                    if (theNumeric > 0 && theNumeric < arrayCount + 1)
-                    {
-                        theNumeric--;
-                        Employee anEmployee = (Employee)anEmployeeArrayList[theNumeric];
-                        anEmployee.selectEmployeeDetails();
-                        keepRunning = false;
-                        break;
-                    }
-                }
                 switch (theInputValue.ToLower())
                 {
                     case "x":
                         keepRunning = false;
                         break;
                     default:
-                        theErrorMessage = "Please enter a valid menu option.";
-                        break;
+                        int theNumeric;
+                        bool isNumeric = int.TryParse(theInputValue, out theNumeric);
+                        if (isNumeric)
+                        {
+                            if (theNumeric > 0 && theNumeric < arrayCount + 1)
+                            {
+                                theNumeric--;
+                                Employee anEmployee = (Employee)anEmployeeArrayList[theNumeric];
+                                anEmployee.selectEmployeeDetails();
+                            }
+                            else
+                            {
+                                theErrorMessage = "Please enter a value in the list.";
+                            }
+                            break;
+                        }
+                        else
+                        {
+                            theErrorMessage = "Please enter a numeric value.";
+                            break;
+                        }
                 }
                 displaySelectEmployeesScreen();
             }

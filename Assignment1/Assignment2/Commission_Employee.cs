@@ -76,11 +76,12 @@ namespace Assignment2
         protected override void displayEmployeeDetails()
         {
             displayEmployeeDetailsHeader();
-            Console.WriteLine(someBlanks + "Welcome to the Commission Employee Screen");
-            Console.WriteLine(someBlanks + "Calculate Gross Pay");
-            Console.WriteLine(someBlanks + "Calculate Net Pay");
-            Console.WriteLine(someBlanks + "Calculate Net Percent");
-            Console.WriteLine(someBlanks + "Display Employee");
+            Console.WriteLine(someBlanks + "Commission Employee Details");
+            Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
+            Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
+            Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
+            Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
+            Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
         }
     }

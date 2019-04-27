@@ -82,8 +82,9 @@ namespace Assignment2
         protected float net = 0.0f;
         protected float net_percent = 0.0f;
         */
-            Console.WriteLine(someBlanks + "Welcome to the Salary Employee Screen");
+            Console.WriteLine(someBlanks + "Salary Employee Details");
             Console.WriteLine(someBlanks + "Calculate Gross Pay : " + gross);
+            Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
             Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
             Console.WriteLine(someBlanks + "Display Employee : ");
