@@ -14,14 +14,12 @@ namespace Assignment2
 {
     class Payroll
     {
-        public String ID;
-        public String Name;
         private string fileLocation;
         private static ConsoleColor theBeginningConsoleColor;
         private ArrayList anEmployeeArrayList;
         private string theErrorMessage;
         private String someBlanks = "                             ";
-        private int sleepTime = 3000;
+        private int sleepTime = 1000;
 
         public Payroll()
         {
@@ -40,11 +38,6 @@ namespace Assignment2
             {
                 Payroll aPayroll = new Payroll();
                 aPayroll.setFileLocation(fileLocation);
-                /*
-                aPayroll.ID = "THE ID";
-                aPayroll.Name = "THE NAME";
-                anArrayList.Add(aPayroll);
-                */
                 aPayroll.Menu();
             }
             else
@@ -183,7 +176,21 @@ namespace Assignment2
                 {
                     if (theNumeric > 0 && theNumeric < arrayCount + 1)
                     {
-
+                        theNumeric--;
+                        Employee anEmployee = null;
+                        if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Hourly"))
+                        {
+                            anEmployee = (Hourly_Employee)anEmployeeArrayList[theNumeric];
+                        }
+                        if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Salary"))
+                        {
+                            anEmployee = (Salary_Employee)anEmployeeArrayList[theNumeric];
+                        }
+                        if (getEmployeeType(anEmployeeArrayList[theNumeric].GetType()).Equals("Commission"))
+                        {
+                            anEmployee = (Commission_Employee)anEmployeeArrayList[theNumeric];
+                        }
+                        anEmployee.selectEmployeeDetails();
                     }
                 }
                 switch (theInputValue.ToLower())

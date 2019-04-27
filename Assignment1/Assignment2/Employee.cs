@@ -95,7 +95,7 @@ namespace Assignment2
             Console.ForegroundColor = ConsoleColor.Green;
             Thread.Sleep(sleepTime);
         }
-        private void selectEmployeeDetails()
+        public void selectEmployeeDetails()
         {
             displayEmployeeDetails();
             bool keepRunning = true;
