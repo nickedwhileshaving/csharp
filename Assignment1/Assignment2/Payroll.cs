@@ -16,7 +16,7 @@ namespace Assignment2
     {
         public String ID;
         public String Name;
-        private static string fileLocation;
+        private string fileLocation;
         private static ConsoleColor theBeginningConsoleColor;
         ArrayList anEmployeeArrayList;
         private string theErrorMessage;
@@ -30,7 +30,7 @@ namespace Assignment2
         static void Main(string[] argumentArray)
         {
             theBeginningConsoleColor = Console.ForegroundColor;
-            fileLocation = null;
+            string fileLocation = null;
             if (argumentArray.Length > 0)
             {
                 fileLocation = argumentArray[0];
@@ -38,6 +38,7 @@ namespace Assignment2
             if (fileLocation != null)
             {
                 Payroll aPayroll = new Payroll();
+                aPayroll.setFileLocation(fileLocation);
                 /*
                 aPayroll.ID = "THE ID";
                 aPayroll.Name = "THE NAME";
@@ -70,7 +71,10 @@ namespace Assignment2
                         SaveEmployee();
                         break;
                     case "4":
-                        LoadEmployees();
+                        if (!LoadEmployees())
+                        {
+                            theErrorMessage = "The employee file does not exist.";
+                        }
                         break;
                     case "5":
                         keepRunning = false;
@@ -175,24 +179,30 @@ namespace Assignment2
         {
             if (doWeHaveAnEmployeeOfEachType())
             {
-                Console.WriteLine("we have at least one of each type.");
+                Console.WriteLine("We have at least one of each type.");
             }
             else
             {
-                Console.WriteLine("we do not have at least one of each type.");
+                Console.WriteLine("We do not have at least one of each type.");
             }
-            Thread.Sleep(5000);
+            Thread.Sleep(3000);
             IFormatter formatter = new BinaryFormatter();
             Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
             formatter.Serialize(stream, anEmployeeArrayList);
             stream.Close();
         }
-        private void LoadEmployees()
+        private bool LoadEmployees()
         {
-            Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
-            IFormatter formatter = new BinaryFormatter();
-            stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
-            anEmployeeArrayList = (ArrayList)formatter.Deserialize(stream);
+            bool theReturnValue = false;
+            if (File.Exists(fileLocation))
+            {
+                theReturnValue = true;
+                Stream stream = new FileStream(fileLocation, FileMode.Create, FileAccess.Write);
+                IFormatter formatter = new BinaryFormatter();
+                stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read);
+                anEmployeeArrayList = (ArrayList)formatter.Deserialize(stream);
+            }
+            return theReturnValue;
         }
         private bool doWeHaveAnEmployeeOfEachType()
         {
@@ -221,8 +231,15 @@ namespace Assignment2
             {
                 returnValue = true;
             }
-            //return returnValue;
-            return false;
+            return returnValue;
+        }
+        public string getFileLocation()
+        {
+            return fileLocation;
+        }
+        public void setFileLocation(string pFileLocation)
+        {
+            this.fileLocation = pFileLocation;
         }
     }
 }

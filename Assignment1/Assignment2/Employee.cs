@@ -13,7 +13,7 @@ namespace Assignment2
         protected bool isFilledOut;
         protected String someBlanks = "                             ";
         protected string theErrorMessage;
-        private int sleepTime = 5000;
+        private int sleepTime = 1000;
         /*********************
              Attributes
         *********************/
