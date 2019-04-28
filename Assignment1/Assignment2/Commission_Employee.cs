@@ -72,7 +72,6 @@ namespace Assignment2
         {
             double aTempDouble = .5 * numberOfItemsSold;
             gross = (float) ( Decimal.Multiply(unitPriceOfItem, (decimal)aTempDouble));
-            string x = "";
         }
     }
 }
