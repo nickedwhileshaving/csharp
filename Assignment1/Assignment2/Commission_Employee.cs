@@ -66,13 +66,13 @@ namespace Assignment2
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
             Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
-            Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
         }
         public new void computeGross()
         {
             double aTempDouble = .5 * numberOfItemsSold;
             gross = (float) ( Decimal.Multiply(unitPriceOfItem, (decimal)aTempDouble));
+            string x = "";
         }
     }
 }

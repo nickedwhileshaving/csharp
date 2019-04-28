@@ -71,7 +71,7 @@ namespace Assignment2
             float standardgrosspay;
             float overtimegrosspay = 0f;
             int hoursOverForty = hours - 40;
-            standardgrosspay = 40 * rate;
+            standardgrosspay = hours * rate;
             if (hoursOverForty > 0)
             {
                 overtimegrosspay = hoursOverForty * rate * 1.5f;

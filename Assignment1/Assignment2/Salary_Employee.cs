@@ -63,7 +63,6 @@ namespace Assignment2
             Console.WriteLine(someBlanks + "Calculate Tax : " + taxrate);
             Console.WriteLine(someBlanks + "Calculate Net Pay : " + net);
             Console.WriteLine(someBlanks + "Calculate Net Percent : " + net_percent);
-            Console.WriteLine(someBlanks + "Display Employee : ");
             Console.WriteLine();
         }
     }
