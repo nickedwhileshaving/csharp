@@ -68,13 +68,17 @@ namespace Assignment2
         }
         public new void computeGross()
         {
-            float standardgrosspay;
+            float standardgrosspay = 0f;
             float overtimegrosspay = 0f;
             int hoursOverForty = hours - 40;
-            standardgrosspay = hours * rate;
             if (hoursOverForty > 0)
             {
                 overtimegrosspay = hoursOverForty * rate * 1.5f;
+                standardgrosspay = 40 * rate;
+            }
+            else
+            {
+                standardgrosspay = hours * rate;
             }
             gross = standardgrosspay + overtimegrosspay;
         }

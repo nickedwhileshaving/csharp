@@ -266,7 +266,7 @@ namespace Assignment2
             {
                 Console.WriteLine("We do not have at least one of each type.");
             }
-            Thread.Sleep(3000);
+            Thread.Sleep(1000);
         }
         private bool LoadEmployees()
         {
@@ -330,36 +330,6 @@ namespace Assignment2
                 }
             }
             return theReturnValue;
-        }
-
-        private bool doWeHaveAnEmployeeOfEachType()
-        {
-            bool returnValue = false;
-            int aCountOfHourlyEmployees = 0;
-            int aCountOfSalaryEmployees = 0;
-            int aCountOfCommissionEmployees = 0;
-            foreach (Employee anEmployee in anEmployeeArrayList)
-            {
-                if (anEmployee.GetType().FullName.Contains("Hourly"))
-                {
-                    aCountOfHourlyEmployees++;
-                }
-                if (anEmployee.GetType().FullName.Contains("Salary"))
-                {
-                    aCountOfSalaryEmployees++;
-                }
-                if (anEmployee.GetType().FullName.Contains("Commission"))
-                {
-                    aCountOfCommissionEmployees++;
-                }
-            }
-            if (aCountOfCommissionEmployees > 0 &&
-                aCountOfHourlyEmployees > 0 &&
-                aCountOfSalaryEmployees > 0)
-            {
-                returnValue = true;
-            }
-            return returnValue;
         }
         public string getFileLocation()
         {
