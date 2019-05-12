@@ -78,3 +78,7 @@ C:\school\csharp\Assignment1\MvcMovie\obj\Debug\MvcMovie.csproj.CoreCompileInput
 C:\school\csharp\Assignment1\MvcMovie\obj\Debug\MvcMovie.csproj.CopyComplete
 C:\school\csharp\Assignment1\MvcMovie\obj\Debug\MvcMovie.dll
 C:\school\csharp\Assignment1\MvcMovie\obj\Debug\MvcMovie.pdb
+C:\school\csharp\Assignment1\MvcMovie\bin\EntityFramework.dll
+C:\school\csharp\Assignment1\MvcMovie\bin\EntityFramework.SqlServer.dll
+C:\school\csharp\Assignment1\MvcMovie\bin\EntityFramework.xml
+C:\school\csharp\Assignment1\MvcMovie\bin\EntityFramework.SqlServer.xml

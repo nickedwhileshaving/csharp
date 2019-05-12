@@ -5,3 +5,8 @@ C:\school\csharp\Assignment1\Assignment2\obj\Debug\Assignment2.csprojAssemblyRef
 C:\school\csharp\Assignment1\Assignment2\obj\Debug\Assignment2.csproj.CoreCompileInputs.cache
 C:\school\csharp\Assignment1\Assignment2\obj\Debug\Assignment2.exe
 C:\school\csharp\Assignment1\Assignment2\obj\Debug\Assignment2.pdb
+C:\school\csharp\Assignment1\Assignment2\bin\Debug\EntityFramework.dll
+C:\school\csharp\Assignment1\Assignment2\bin\Debug\EntityFramework.SqlServer.dll
+C:\school\csharp\Assignment1\Assignment2\bin\Debug\EntityFramework.xml
+C:\school\csharp\Assignment1\Assignment2\bin\Debug\EntityFramework.SqlServer.xml
+C:\school\csharp\Assignment1\Assignment2\obj\Debug\Assignment2.csproj.CopyComplete
